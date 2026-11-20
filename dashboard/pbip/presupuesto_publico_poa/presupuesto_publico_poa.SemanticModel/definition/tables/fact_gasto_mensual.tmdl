@@ -1,0 +1,132 @@
+table fact_gasto_mensual
+	lineageTag: e0cd4842-0e53-53b9-820c-6293f7b686dd
+
+	column fecha
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: b0eb4c74-a92e-57d4-84c5-5a27473f5566
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 068aff6a-dbfc-54e8-970a-cff63297cf7a
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column entidad_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 79c3bac9-2894-55d9-b750-2ac543f69c18
+		summarizeBy: none
+		sourceColumn: entidad_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column funcion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bd81540a-fbcf-5c78-b109-751ab9a635bf
+		summarizeBy: none
+		sourceColumn: funcion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 47823446-fd2e-5636-a941-127b823ffcee
+		summarizeBy: none
+		sourceColumn: fuente_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 57855afc-36bc-5cc9-a820-4e53c3f7fb29
+		summarizeBy: none
+		sourceColumn: categoria_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_intervencion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bfd14593-ece2-544c-be83-4876145df823
+		summarizeBy: none
+		sourceColumn: tipo_intervencion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1d66d16c-badc-5d06-90f9-642a624a7971
+		summarizeBy: none
+		sourceColumn: departamento_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column programa_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c12363fc-82a4-5b07-8c9e-2bf4e12043d4
+		summarizeBy: none
+		sourceColumn: programa_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_devengado
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0e5984e8-86da-5ea0-8d7e-2337ba94cdd5
+		summarizeBy: sum
+		sourceColumn: monto_devengado
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_extorno
+		dataType: double
+		formatString: #,0.00
+		lineageTag: a23c702a-58bf-50ea-8ddf-566fcb86977e
+		summarizeBy: sum
+		sourceColumn: monto_extorno
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_registros
+		dataType: int64
+		formatString: 0
+		lineageTag: 04fe241f-ad8d-5960-bfd8-2fb35a9741df
+		summarizeBy: sum
+		sourceColumn: n_registros
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_gasto_mensual = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "fact_gasto_mensual.parquet")),
+				    Resultado = Table.TransformColumnTypes(Origen, {{"fecha", type date}})
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

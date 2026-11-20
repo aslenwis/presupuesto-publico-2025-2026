@@ -1,0 +1,113 @@
+table clasificacion_entidades
+	lineageTag: 1f88df74-f64e-5363-a6dd-7551630c29ce
+
+	column anio
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2902e18d-3a5d-5140-950b-1ac2af1e6794
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column entidad_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d6cd7767-fdf0-51bc-a86e-bb289b435518
+		summarizeBy: none
+		sourceColumn: entidad_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_pim
+		dataType: double
+		formatString: #,0
+		lineageTag: da8d646b-a4df-53b9-867e-c291a54f15cc
+		summarizeBy: none
+		sourceColumn: monto_pim
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_devengado
+		dataType: double
+		formatString: #,0
+		lineageTag: 34c7acf1-b3b0-5af3-b1f2-cd1035c2752f
+		summarizeBy: none
+		sourceColumn: monto_devengado
+
+		annotation SummarizationSetBy = Automatic
+
+	column dev_hasta_corte
+		dataType: double
+		formatString: #,0
+		lineageTag: cc0e3003-d6e2-51cb-ad0d-ffe91e4e1df7
+		summarizeBy: none
+		sourceColumn: dev_hasta_corte
+
+		annotation SummarizationSetBy = Automatic
+
+	column avance
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 103fc487-6075-5410-9f1f-27f8f41b588d
+		summarizeBy: none
+		sourceColumn: avance
+
+		annotation SummarizationSetBy = Automatic
+
+	column avance_evaluado
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 74daa430-918c-574f-8abc-c13a429b890d
+		summarizeBy: none
+		sourceColumn: avance_evaluado
+
+		annotation SummarizationSetBy = Automatic
+
+	column clase
+		dataType: string
+		lineageTag: c52c9a80-c92e-5e32-9429-e4748435f48f
+		summarizeBy: none
+		sourceColumn: clase
+		sortByColumn: orden_clase
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_clase
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c34f6a3c-e8c2-5d79-81f0-ebe5416c7207
+		summarizeBy: none
+		sourceColumn: orden_clase
+
+		annotation SummarizationSetBy = Automatic
+
+	column cuartil
+		dataType: string
+		lineageTag: c6ac8d8b-76d3-5530-892b-b7e4f4a42935
+		summarizeBy: none
+		sourceColumn: cuartil
+
+		annotation SummarizationSetBy = Automatic
+
+	column pim_relevante
+		dataType: boolean
+		lineageTag: 4f100d29-8c5b-569b-a005-9ecc6b8917e0
+		summarizeBy: none
+		sourceColumn: pim_relevante
+
+		annotation SummarizationSetBy = Automatic
+
+	partition clasificacion_entidades = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "clasificacion_entidades.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

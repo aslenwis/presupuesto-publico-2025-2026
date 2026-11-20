@@ -1,0 +1,97 @@
+table estacionalidad_mensual
+	lineageTag: 07a380ff-2732-5726-8af1-912b804c5d77
+
+	column anio
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0a8c7464-a921-5858-b504-75cd2f04015e
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_num
+		dataType: int64
+		formatString: 0
+		lineageTag: fb82bbe6-996e-5fe4-9614-8ee968baa4a9
+		summarizeBy: none
+		sourceColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_abrev
+		dataType: string
+		lineageTag: 78c34622-0e41-5ff8-938b-463e2d35b8bc
+		summarizeBy: none
+		sourceColumn: mes_abrev
+		sortByColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		isHidden
+		formatString: dd/mm/yyyy
+		lineageTag: e3f66607-eb6d-5097-b3c9-6f996cfed735
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column devengado
+		dataType: double
+		formatString: #,0,,.0
+		lineageTag: 984518c4-513d-5388-93ed-05ab212d2ec3
+		summarizeBy: none
+		sourceColumn: devengado
+
+		annotation SummarizationSetBy = Automatic
+
+	column variacion_mensual
+		dataType: double
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: fe017699-e2b2-5998-8868-9bef8dbefe20
+		summarizeBy: none
+		sourceColumn: variacion_mensual
+
+		annotation SummarizationSetBy = Automatic
+
+	column indice_estacional
+		dataType: double
+		formatString: 0.00
+		lineageTag: 86814e10-6629-5dea-b561-9329f798e210
+		summarizeBy: none
+		sourceColumn: indice_estacional
+
+		annotation SummarizationSetBy = Automatic
+
+	column participacion
+		dataType: double
+		formatString: 0.0%
+		lineageTag: a8dba4e1-81c1-50e5-8551-1e84f77462a3
+		summarizeBy: none
+		sourceColumn: participacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: string
+		lineageTag: 5a575336-22d5-5677-a680-3b2870a2b5c6
+		summarizeBy: none
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition estacionalidad_mensual = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "estacionalidad_mensual.parquet")),
+				    Resultado = Table.TransformColumnTypes(Origen, {{"fecha", type date}})
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

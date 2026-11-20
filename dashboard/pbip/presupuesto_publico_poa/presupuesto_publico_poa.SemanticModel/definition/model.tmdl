@@ -1,0 +1,36 @@
+model Model
+	culture: es-PE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-PE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["RutaGold", "dim_anio", "dim_calendario", "dim_categoria_gasto", "dim_departamento", "dim_entidad", "dim_fuente_financiamiento", "dim_funcion", "dim_tipo_intervencion", "dim_programa_presupuestal", "fact_gasto_mensual", "fact_presupuesto_anual", "indicadores_poa", "metas_sector_poa", "programacion_poa", "proyeccion_mensual", "proyeccion_metodos", "clasificacion_entidades", "estacionalidad_mensual", "atipicos_entidades", "ley_2026_cuadre", "dim_etapa", "_Medidas"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_anio
+ref table dim_calendario
+ref table dim_categoria_gasto
+ref table dim_departamento
+ref table dim_entidad
+ref table dim_fuente_financiamiento
+ref table dim_funcion
+ref table dim_tipo_intervencion
+ref table dim_programa_presupuestal
+ref table fact_gasto_mensual
+ref table fact_presupuesto_anual
+ref table indicadores_poa
+ref table metas_sector_poa
+ref table programacion_poa
+ref table proyeccion_mensual
+ref table proyeccion_metodos
+ref table clasificacion_entidades
+ref table estacionalidad_mensual
+ref table atipicos_entidades
+ref table ley_2026_cuadre
+ref table dim_etapa
+ref table _Medidas

@@ -1,0 +1,39 @@
+table dim_funcion
+	lineageTag: 62270e20-617c-5c39-8670-2a1827476be8
+
+	column funcion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 53e58a7a-ba22-58d0-ad15-19b2143a7e18
+		summarizeBy: none
+		sourceColumn: funcion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column funcion
+		dataType: string
+		lineageTag: 10f5bc21-852c-529c-a349-aaaa69d27580
+		summarizeBy: none
+		sourceColumn: funcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column funcion_nombre
+		dataType: string
+		lineageTag: 780cd6ae-db37-5c94-8d24-a5ff971a5615
+		summarizeBy: none
+		sourceColumn: funcion_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_funcion = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_funcion.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,91 @@
+table proyeccion_metodos
+	lineageTag: 9eb77640-994e-59e1-868e-739dcd197dd5
+
+	column metodo_codigo
+		dataType: string
+		lineageTag: 63d9654b-96ee-5c0d-b571-e474389c70eb
+		summarizeBy: none
+		sourceColumn: metodo_codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column metodo
+		dataType: string
+		lineageTag: 383f031b-167a-52e4-9706-1dbfa5f1301f
+		summarizeBy: none
+		sourceColumn: metodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column devengado_proyectado
+		dataType: double
+		formatString: #,0,,.0
+		lineageTag: de9b01d4-3962-571f-a600-c64465e029f4
+		summarizeBy: none
+		sourceColumn: devengado_proyectado
+
+		annotation SummarizationSetBy = Automatic
+
+	column avance_proyectado
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 2bf3d822-8e43-55ff-a928-70ab87709bb4
+		summarizeBy: none
+		sourceColumn: avance_proyectado
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_inferior
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 99057ca5-4f61-5670-abc5-e5f7870a2424
+		summarizeBy: none
+		sourceColumn: limite_inferior
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_superior
+		dataType: double
+		formatString: 0.0%
+		lineageTag: dbdd0b2b-2e0d-5ac4-bbc8-c0e00d902b71
+		summarizeBy: none
+		sourceColumn: limite_superior
+
+		annotation SummarizationSetBy = Automatic
+
+	column parametro
+		dataType: double
+		formatString: #,0.000
+		lineageTag: d4516a84-5dbe-5ad3-a169-69aed169498a
+		summarizeBy: none
+		sourceColumn: parametro
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_prueba_base
+		dataType: double
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 5c3e6a91-0fa0-5a2e-8d8e-928612317c61
+		summarizeBy: none
+		sourceColumn: error_prueba_base
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_metodo_oficial
+		dataType: boolean
+		lineageTag: c1d9961d-4528-50bb-b472-3b4e105a8b3d
+		summarizeBy: none
+		sourceColumn: es_metodo_oficial
+
+		annotation SummarizationSetBy = Automatic
+
+	partition proyeccion_metodos = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "proyeccion_metodos.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

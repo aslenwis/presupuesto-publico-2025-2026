@@ -1,0 +1,102 @@
+table dim_anio
+	lineageTag: 8b32e027-9952-562d-8b6d-d7b391616082
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: 99e70fa3-aa04-5e48-93f6-d189e1ca55df
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_ultimo_dato
+		dataType: int64
+		formatString: 0
+		lineageTag: d0064ffc-d1ed-51fb-a7fe-5cc90b7658fa
+		summarizeBy: none
+		sourceColumn: mes_ultimo_dato
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_ultimo_mes_parcial
+		dataType: boolean
+		lineageTag: 74de7d4d-3bb6-57b0-bded-ce0c57725399
+		summarizeBy: none
+		sourceColumn: es_ultimo_mes_parcial
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_ultimo_completo
+		dataType: int64
+		formatString: 0
+		lineageTag: 53f5f82b-2e77-5d98-ab85-5024510a3191
+		summarizeBy: none
+		sourceColumn: mes_ultimo_completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_anio_cerrado
+		dataType: boolean
+		lineageTag: c3acff9a-4fc5-5948-8ae9-90beae5b7ab7
+		summarizeBy: none
+		sourceColumn: es_anio_cerrado
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_ultimo_dato
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 589e7a92-162b-588e-b51e-7bc3a665325c
+		summarizeBy: none
+		sourceColumn: fecha_ultimo_dato
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column mes_corte_comparable
+		dataType: int64
+		formatString: 0
+		lineageTag: edb195dd-47e1-5db4-bf33-f390ac34083c
+		summarizeBy: none
+		sourceColumn: mes_corte_comparable
+
+		annotation SummarizationSetBy = Automatic
+
+	column periodo_comparable
+		dataType: string
+		lineageTag: 618a336c-4b4f-54d5-915c-682e0a3798c7
+		summarizeBy: none
+		sourceColumn: periodo_comparable
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_texto
+		dataType: string
+		lineageTag: 95e62278-d5ad-56ba-af5f-9553f21af048
+		summarizeBy: none
+		sourceColumn: anio_texto
+		sortByColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_etiqueta
+		dataType: string
+		lineageTag: f8d9e8ab-4b6f-5e83-be0a-bdee40cbc6bc
+		summarizeBy: none
+		sourceColumn: anio_etiqueta
+		sortByColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_anio = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_anio.parquet")),
+				    Resultado = Table.TransformColumnTypes(Origen, {{"fecha_ultimo_dato", type date}})
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

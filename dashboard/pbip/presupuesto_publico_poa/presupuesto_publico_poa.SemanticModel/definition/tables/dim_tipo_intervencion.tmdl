@@ -1,0 +1,39 @@
+table dim_tipo_intervencion
+	lineageTag: 0e3b06f4-39cf-514f-9cd7-9ef7b61bd358
+
+	column tipo_intervencion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e3166538-eac0-5dec-a7fd-9b90d8a8740c
+		summarizeBy: none
+		sourceColumn: tipo_intervencion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_act_proy
+		dataType: string
+		lineageTag: 8f88aa64-f774-5cd1-979f-5764088151c8
+		summarizeBy: none
+		sourceColumn: tipo_act_proy
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_intervencion
+		dataType: string
+		lineageTag: 46c2a8d1-7b3b-5697-a467-19ca49c4f4cc
+		summarizeBy: none
+		sourceColumn: tipo_intervencion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_tipo_intervencion = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_tipo_intervencion.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

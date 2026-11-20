@@ -1,0 +1,93 @@
+table ley_2026_cuadre
+	lineageTag: fb25bec5-4f8d-589a-a8fd-e6b6737fcef1
+
+	column concepto
+		dataType: string
+		lineageTag: efcef4e5-8cd4-5f06-b52d-e2bc23f1d498
+		summarizeBy: none
+		sourceColumn: concepto
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: fcb86332-118c-55bd-b34f-e6b35b6b8c26
+		summarizeBy: none
+		sourceColumn: categoria
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_oficial
+		dataType: double
+		formatString: #,0
+		lineageTag: c00c4493-2dff-52a6-b3c8-3c54c4f6e1ca
+		summarizeBy: none
+		sourceColumn: monto_oficial
+
+		annotation SummarizationSetBy = Automatic
+
+	column participacion_oficial
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 7142a8b9-0832-5e1a-80b9-b2588951c716
+		summarizeBy: none
+		sourceColumn: participacion_oficial
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_gold
+		dataType: double
+		formatString: #,0
+		lineageTag: f8b2290f-97de-5852-813a-ec2ee984c5a0
+		summarizeBy: none
+		sourceColumn: monto_gold
+
+		annotation SummarizationSetBy = Automatic
+
+	column participacion_gold
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 34b23acd-2f40-5873-8beb-de0788c27f40
+		summarizeBy: none
+		sourceColumn: participacion_gold
+
+		annotation SummarizationSetBy = Automatic
+
+	column referencia
+		dataType: string
+		lineageTag: 356b458b-ac0b-5bde-af1f-9ef4a18be7c0
+		summarizeBy: none
+		sourceColumn: referencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column diferencia_pct
+		dataType: double
+		formatString: +0.00%;-0.00%;0.00%
+		lineageTag: 7807ed16-5b79-5cc9-80c9-8224d0126b77
+		summarizeBy: none
+		sourceColumn: diferencia_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9e9806d5-4068-5ac3-b211-151cc1c490ea
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ley_2026_cuadre = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "ley_2026_cuadre.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

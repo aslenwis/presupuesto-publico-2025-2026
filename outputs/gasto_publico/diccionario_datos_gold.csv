@@ -1,0 +1,192 @@
+﻿tabla,columna,tipo,descripción
+fact_gasto_mensual,fecha,fecha,Primer día del mes (AAAA-MM-01)
+fact_gasto_mensual,anio,int32,Año fiscal
+fact_gasto_mensual,entidad_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,funcion_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,fuente_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,categoria_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,tipo_intervencion_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,departamento_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,programa_key,int32,Clave sustituta (entero)
+fact_gasto_mensual,monto_devengado,float64,Devengado neto del mes / año (S/)
+fact_gasto_mensual,monto_extorno,float64,"Parte negativa del devengado: anulaciones (S/, ≤ 0)"
+fact_gasto_mensual,n_registros,int64,Registros línea × mes agregados
+fact_presupuesto_anual,anio,int32,Año fiscal
+fact_presupuesto_anual,entidad_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,funcion_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,fuente_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,categoria_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,tipo_intervencion_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,departamento_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,programa_key,int32,Clave sustituta (entero)
+fact_presupuesto_anual,monto_pia,float64,Presupuesto de apertura (S/)
+fact_presupuesto_anual,monto_pim,float64,Presupuesto modificado (S/)
+fact_presupuesto_anual,monto_certificado,float64,Certificado anual (S/)
+fact_presupuesto_anual,monto_comprometido,float64,Comprometido anual (S/)
+fact_presupuesto_anual,monto_devengado,float64,Devengado neto del mes / año (S/)
+fact_presupuesto_anual,monto_girado,float64,Girado anual (S/)
+fact_presupuesto_anual,n_lineas,int64,Líneas presupuestales agregadas
+dim_calendario,fecha,fecha,Primer día del mes (AAAA-MM-01)
+dim_calendario,anio,int32,Año fiscal
+dim_calendario,mes_num,int32,Mes (1–12)
+dim_calendario,mes_nombre,texto,Atributo descriptivo / código MEF
+dim_calendario,mes_abrev,texto,Mes abreviado
+dim_calendario,trimestre,texto,Trimestre
+dim_calendario,semestre,texto,Atributo descriptivo / código MEF
+dim_calendario,anio_mes,texto,Atributo descriptivo / código MEF
+dim_calendario,anio_mes_num,int32,Atributo descriptivo / código MEF
+dim_calendario,tiene_datos,bool,El mes ya tiene devengado registrado
+dim_calendario,es_periodo_comparable,bool,Mes dentro del periodo comparable
+dim_anio,anio,int32,Año fiscal
+dim_anio,mes_ultimo_dato,int32,Último mes con devengado registrado
+dim_anio,es_ultimo_mes_parcial,bool,El último mes aún está en curso
+dim_anio,mes_ultimo_completo,int32,Atributo descriptivo / código MEF
+dim_anio,es_anio_cerrado,bool,Atributo descriptivo / código MEF
+dim_anio,fecha_ultimo_dato,fecha,Atributo descriptivo / código MEF
+dim_anio,mes_corte_comparable,int32,Último mes completo común a todos los años (para comparar 2026 vs 2025)
+dim_anio,periodo_comparable,texto,Atributo descriptivo / código MEF
+dim_anio,anio_texto,texto,Atributo descriptivo / código MEF
+dim_anio,anio_etiqueta,texto,Atributo descriptivo / código MEF
+dim_entidad,entidad_key,int32,Clave sustituta (entero)
+dim_entidad,sec_ejec,texto,Atributo descriptivo / código MEF
+dim_entidad,nivel_gobierno,texto,Atributo descriptivo / código MEF
+dim_entidad,nivel_gobierno_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,sector,texto,Sector del presupuesto
+dim_entidad,sector_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,pliego,texto,Atributo descriptivo / código MEF
+dim_entidad,pliego_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,ejecutora,texto,Atributo descriptivo / código MEF
+dim_entidad,ejecutora_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,departamento_ejecutora_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,provincia_ejecutora_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,distrito_ejecutora_nombre,texto,Atributo descriptivo / código MEF
+dim_entidad,ejecutora_etiqueta,texto,Atributo descriptivo / código MEF
+dim_funcion,funcion_key,int32,Clave sustituta (entero)
+dim_funcion,funcion,texto,Atributo descriptivo / código MEF
+dim_funcion,funcion_nombre,texto,Atributo descriptivo / código MEF
+dim_fuente_financiamiento,fuente_key,int32,Clave sustituta (entero)
+dim_fuente_financiamiento,fuente_financiamiento,texto,Atributo descriptivo / código MEF
+dim_fuente_financiamiento,rubro,texto,Atributo descriptivo / código MEF
+dim_fuente_financiamiento,fuente_financiamiento_nombre,texto,Atributo descriptivo / código MEF
+dim_fuente_financiamiento,rubro_nombre,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,categoria_key,int32,Clave sustituta (entero)
+dim_categoria_gasto,categoria_gasto,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,tipo_transaccion,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,generica,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,categoria_gasto_nombre,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,tipo_transaccion_nombre,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,generica_nombre,texto,Atributo descriptivo / código MEF
+dim_categoria_gasto,generica_etiqueta,texto,Atributo descriptivo / código MEF
+dim_tipo_intervencion,tipo_intervencion_key,int32,Clave sustituta (entero)
+dim_tipo_intervencion,tipo_act_proy,texto,Atributo descriptivo / código MEF
+dim_tipo_intervencion,tipo_intervencion,texto,Atributo descriptivo / código MEF
+dim_departamento,departamento_key,int32,Clave sustituta (entero)
+dim_departamento,departamento_meta,texto,Atributo descriptivo / código MEF
+dim_departamento,departamento_meta_nombre,texto,Atributo descriptivo / código MEF
+dim_programa_presupuestal,programa_key,int32,Clave sustituta (entero)
+dim_programa_presupuestal,programa_ppto,texto,Atributo descriptivo / código MEF
+dim_programa_presupuestal,programa_ppto_nombre,texto,Atributo descriptivo / código MEF
+dim_programa_presupuestal,programa_etiqueta,texto,Atributo descriptivo / código MEF
+dim_programa_presupuestal,tipo_programa,texto,Atributo descriptivo / código MEF
+proyeccion_mensual,anio,int32,Año fiscal
+proyeccion_mensual,mes_num,int32,Mes (1–12)
+proyeccion_mensual,mes_abrev,texto,Mes abreviado
+proyeccion_mensual,real_acumulado,float64,Devengado acumulado ÷ PIM (meses con datos)
+proyeccion_mensual,proy_b,float64,"Proyección método B (tendencia lineal), acumulado ÷ PIM"
+proyeccion_mensual,proy_c,float64,Proyección método C (regresión sobre el año base)
+proyeccion_mensual,proy_a,float64,"Proyección método A (estacional), acumulado ÷ PIM"
+proyeccion_mensual,lim_inf_c,float64,Límite inferior del intervalo al 95 % (método C)
+proyeccion_mensual,lim_sup_c,float64,Límite superior del intervalo al 95 % (método C)
+proyeccion_metodos,metodo_codigo,texto,A / B / C
+proyeccion_metodos,metodo,texto,Método de proyección
+proyeccion_metodos,devengado_proyectado,float64,Devengado anual proyectado (S/)
+proyeccion_metodos,avance_proyectado,float64,Devengado proyectado ÷ PIM (máx. 100 %)
+proyeccion_metodos,limite_inferior,float64,Límite inferior (intervalo o regla IQR)
+proyeccion_metodos,limite_superior,float64,Límite superior (intervalo o regla IQR)
+proyeccion_metodos,parametro,float64,Pendiente (B) o β (C) de la regresión
+proyeccion_metodos,error_prueba_base,float64,Error de la proyección al aplicarla al año base
+proyeccion_metodos,es_metodo_oficial,bool,Método usado en el POA y el dashboard
+clasificacion_entidades,anio,int32,Año fiscal
+clasificacion_entidades,entidad_key,int32,Clave sustituta (entero)
+clasificacion_entidades,monto_pim,float64,Presupuesto modificado (S/)
+clasificacion_entidades,monto_devengado,float64,Devengado neto del mes / año (S/)
+clasificacion_entidades,dev_hasta_corte,float64,Devengado hasta el último mes con datos (S/)
+clasificacion_entidades,avance,float64,Devengado ÷ PIM
+clasificacion_entidades,avance_evaluado,float64,Avance usado para clasificar (anual o proyectado)
+clasificacion_entidades,clase,texto,Clase de ejecución (Muy alta … Muy baja)
+clasificacion_entidades,orden_clase,int32,Orden de la clase (1 = Muy alta)
+clasificacion_entidades,cuartil,texto,Cuartil del avance entre entidades relevantes
+clasificacion_entidades,pim_relevante,bool,PIM ≥ S/ 5 M
+estacionalidad_mensual,anio,int32,Año fiscal
+estacionalidad_mensual,mes_num,int32,Mes (1–12)
+estacionalidad_mensual,mes_abrev,texto,Mes abreviado
+estacionalidad_mensual,fecha,fecha,Primer día del mes (AAAA-MM-01)
+estacionalidad_mensual,devengado,float64,Devengado del mes (S/)
+estacionalidad_mensual,variacion_mensual,float64,Variación respecto del mes anterior
+estacionalidad_mensual,indice_estacional,float64,Devengado del mes ÷ promedio mensual del año
+estacionalidad_mensual,participacion,float64,Parte del devengado del año
+estacionalidad_mensual,trimestre,texto,Trimestre
+atipicos_entidades,anio,int32,Año fiscal
+atipicos_entidades,entidad_key,int32,Clave sustituta (entero)
+atipicos_entidades,variable,texto,Variable evaluada
+atipicos_entidades,unidad,texto,Unidad de medida
+atipicos_entidades,valor,float64,Valor observado
+atipicos_entidades,mediana_grupo,float64,Mediana del nivel de gobierno
+atipicos_entidades,limite_inferior,float64,Límite inferior (intervalo o regla IQR)
+atipicos_entidades,limite_superior,float64,Límite superior (intervalo o regla IQR)
+atipicos_entidades,z_robusta,float64,Puntaje z robusto (mediana/MAD)
+atipicos_entidades,tipo,texto,Alto o bajo frente a la mediana
+atipicos_entidades,tecnica,texto,Técnica que lo detecta
+atipicos_entidades,severidad,texto,Extremo (fuera de 3·IQR) o moderado
+ley_2026_cuadre,concepto,texto,Tipo de contraste
+ley_2026_cuadre,categoria,texto,Categoría contrastada
+ley_2026_cuadre,monto_oficial,float64,Monto publicado (S/)
+ley_2026_cuadre,participacion_oficial,float64,Participación publicada
+ley_2026_cuadre,monto_gold,float64,PIA 2026 calculado en Gold (S/)
+ley_2026_cuadre,participacion_gold,float64,Participación calculada en Gold
+ley_2026_cuadre,referencia,texto,Documento oficial de referencia
+ley_2026_cuadre,diferencia_pct,float64,Gold ÷ oficial − 1
+ley_2026_cuadre,orden,int32,Orden de presentación
+indicadores_poa,orden,int32,Orden de presentación
+indicadores_poa,objetivo_codigo,texto,Código del objetivo operativo
+indicadores_poa,objetivo_operativo,texto,Objetivo operativo del POA
+indicadores_poa,resultado_esperado,texto,Resultado que persigue el objetivo
+indicadores_poa,codigo,texto,Código del indicador
+indicadores_poa,indicador,texto,Nombre del indicador
+indicadores_poa,objetivo,texto,Qué busca medir
+indicadores_poa,formula,texto,Fórmula de cálculo
+indicadores_poa,unidad,texto,Unidad de medida
+indicadores_poa,sentido,texto,Mayor o menor es mejor
+indicadores_poa,frecuencia,texto,Periodicidad de medición
+indicadores_poa,fuente,texto,Origen del dato
+indicadores_poa,linea_base,float64,Valor del año base (2025)
+indicadores_poa,valor_al_corte,float64,Valor de 2026 al último mes con datos
+indicadores_poa,proyeccion_cierre,float64,Proyección de cierre 2026 (método estacional)
+indicadores_poa,meta_anio_seg,float64,Meta 2026 = línea base
+indicadores_poa,meta_poa,float64,Meta del POA 2027
+indicadores_poa,brecha_proyeccion_pp,float64,"Proyección − meta (puntos, en el sentido del indicador)"
+indicadores_poa,estado,texto,Cumple / En riesgo / No cumple
+indicadores_poa,color_estado,texto,Color del semáforo (hex)
+indicadores_poa,accion_mejora,texto,Acción de mejora propuesta
+indicadores_poa,responsable,texto,Unidad orgánica responsable
+indicadores_poa,anio_base,int32,Año de la línea base
+indicadores_poa,anio_seguimiento,int32,Año en seguimiento
+indicadores_poa,anio_poa,int32,Año planificado
+metas_sector_poa,sector,texto,Sector del presupuesto
+metas_sector_poa,pim_anio_seg,float64,PIM 2026 (S/)
+metas_sector_poa,avance_base,float64,Avance 2025 (devengado ÷ PIM)
+metas_sector_poa,avance_al_corte,float64,Avance 2026 al corte
+metas_sector_poa,proyeccion_cierre,float64,Proyección de cierre 2026 (método estacional)
+metas_sector_poa,meta_poa,float64,Meta del POA 2027
+metas_sector_poa,brecha_proyeccion_pp,float64,"Proyección − meta (puntos, en el sentido del indicador)"
+metas_sector_poa,prioridad,texto,Alta / Media / Baja según la brecha de la proyección
+metas_sector_poa,accion_sugerida,texto,Acción sugerida según la prioridad
+metas_sector_poa,color_prioridad,texto,Color de la prioridad (hex)
+programacion_poa,serie,texto,Real / Proyección / Meta POA
+programacion_poa,anio,int32,Año fiscal
+programacion_poa,serie_etiqueta,texto,Serie y año
+programacion_poa,mes_num,int32,Mes (1–12)
+programacion_poa,mes_abrev,texto,Mes abreviado
+programacion_poa,avance_acumulado,float64,Devengado acumulado ÷ PIM
+programacion_poa,pim_referencial,float64,PIM supuesto para el POA (S/)
+programacion_poa,devengado_programado,float64,Devengado acumulado programado (S/)

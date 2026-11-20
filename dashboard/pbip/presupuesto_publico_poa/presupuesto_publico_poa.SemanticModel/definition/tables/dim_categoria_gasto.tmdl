@@ -1,0 +1,90 @@
+table dim_categoria_gasto
+	lineageTag: 5c225155-9b78-571a-91a6-ae05f8877902
+
+	column categoria_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ff104924-cfb4-5e2c-9d8f-3f56659efc10
+		summarizeBy: none
+		sourceColumn: categoria_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_gasto
+		dataType: string
+		lineageTag: 40ccd8bc-b0f5-56b1-9973-7d6897853ce3
+		summarizeBy: none
+		sourceColumn: categoria_gasto
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_transaccion
+		dataType: string
+		lineageTag: b718352e-0152-5c2b-96cd-1394bea39180
+		summarizeBy: none
+		sourceColumn: tipo_transaccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column generica
+		dataType: string
+		lineageTag: 28aa53b4-8148-5467-b3ff-f402c828e1af
+		summarizeBy: none
+		sourceColumn: generica
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_gasto_nombre
+		dataType: string
+		lineageTag: 32fe1873-997b-52c2-a4bf-f6cae7a9da7b
+		summarizeBy: none
+		sourceColumn: categoria_gasto_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_transaccion_nombre
+		dataType: string
+		lineageTag: a10e8740-f203-5f8a-9cfb-3d95f3e9fc36
+		summarizeBy: none
+		sourceColumn: tipo_transaccion_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column generica_nombre
+		dataType: string
+		lineageTag: 6e66e1c7-2f0c-5fb9-9e2f-450901e054b5
+		summarizeBy: none
+		sourceColumn: generica_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column generica_etiqueta
+		dataType: string
+		lineageTag: a41a15e3-7d58-5cbc-8c95-3ab41ebe41d3
+		summarizeBy: none
+		sourceColumn: generica_etiqueta
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Jerarquia gasto'
+		lineageTag: 4f0d4f68-c46e-5656-92a9-18e9dbebb095
+
+		level 'Categoria'
+			lineageTag: c40a61b6-afb5-51a3-82d4-88c7f0819ece
+			column: categoria_gasto_nombre
+
+		level 'Generica'
+			lineageTag: 0d95d60d-6da2-5bef-86db-d940eb347c51
+			column: generica_nombre
+
+	partition dim_categoria_gasto = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_categoria_gasto.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,87 @@
+relationship 59f69399-432c-5e77-868c-afd58db157fe
+	fromColumn: dim_calendario.anio
+	toColumn: dim_anio.anio
+
+relationship 3e9a59ab-2183-5786-b1bb-4cd2a9b8e888
+	fromColumn: fact_presupuesto_anual.anio
+	toColumn: dim_anio.anio
+
+relationship 246248bf-48b5-5f0a-8198-62f7adf899f4
+	fromColumn: fact_gasto_mensual.fecha
+	toColumn: dim_calendario.fecha
+
+relationship be6d8054-1406-583b-a59a-3934bfacea0b
+	fromColumn: fact_gasto_mensual.entidad_key
+	toColumn: dim_entidad.entidad_key
+
+relationship 9c23966e-c9ff-52a3-83ba-66b055ec20bd
+	fromColumn: fact_gasto_mensual.funcion_key
+	toColumn: dim_funcion.funcion_key
+
+relationship 57870e0a-d7d3-506a-88d9-92194001be2a
+	fromColumn: fact_gasto_mensual.fuente_key
+	toColumn: dim_fuente_financiamiento.fuente_key
+
+relationship c716c621-eac4-596a-8f4c-07f8bebf6863
+	fromColumn: fact_gasto_mensual.categoria_key
+	toColumn: dim_categoria_gasto.categoria_key
+
+relationship af826797-3d7f-5b84-8574-7a7916604060
+	fromColumn: fact_gasto_mensual.tipo_intervencion_key
+	toColumn: dim_tipo_intervencion.tipo_intervencion_key
+
+relationship 50a7b885-a20f-5ac2-a34d-0f2f285bf4d8
+	fromColumn: fact_gasto_mensual.departamento_key
+	toColumn: dim_departamento.departamento_key
+
+relationship 539c3774-1575-5b72-be24-310d4b0e28ad
+	fromColumn: fact_gasto_mensual.programa_key
+	toColumn: dim_programa_presupuestal.programa_key
+
+relationship a993158e-e017-56c3-98ee-9bc00feff523
+	fromColumn: fact_presupuesto_anual.entidad_key
+	toColumn: dim_entidad.entidad_key
+
+relationship 9266c1ce-2396-5e53-9011-be7606edd307
+	fromColumn: fact_presupuesto_anual.funcion_key
+	toColumn: dim_funcion.funcion_key
+
+relationship d9212ccf-6aa1-5493-aee0-7de8cb758f06
+	fromColumn: fact_presupuesto_anual.fuente_key
+	toColumn: dim_fuente_financiamiento.fuente_key
+
+relationship ef4d2999-1662-5dd0-95c2-c2161e34b2a5
+	fromColumn: fact_presupuesto_anual.categoria_key
+	toColumn: dim_categoria_gasto.categoria_key
+
+relationship 310769bf-987a-534e-aace-ae654b02bcc9
+	fromColumn: fact_presupuesto_anual.tipo_intervencion_key
+	toColumn: dim_tipo_intervencion.tipo_intervencion_key
+
+relationship 0907b3db-a6c5-5dce-855c-adf2cd259e0c
+	fromColumn: fact_presupuesto_anual.departamento_key
+	toColumn: dim_departamento.departamento_key
+
+relationship cefda55a-4d10-505d-bee1-7593cb7a0d10
+	fromColumn: fact_presupuesto_anual.programa_key
+	toColumn: dim_programa_presupuestal.programa_key
+
+relationship a20f4f9f-9ee3-55ed-a972-344ad44784c4
+	fromColumn: clasificacion_entidades.entidad_key
+	toColumn: dim_entidad.entidad_key
+
+relationship cbfdbeef-b7cd-5ab2-9635-093c15067301
+	fromColumn: clasificacion_entidades.anio
+	toColumn: dim_anio.anio
+
+relationship 9e529720-c970-5da1-becb-67f7e40864e7
+	fromColumn: atipicos_entidades.entidad_key
+	toColumn: dim_entidad.entidad_key
+
+relationship ccfafdce-26ee-5e3e-ae7a-12188319402a
+	fromColumn: atipicos_entidades.anio
+	toColumn: dim_anio.anio
+
+relationship 951fa4a0-f1fa-522f-b601-c52a5b3de667
+	fromColumn: estacionalidad_mensual.anio
+	toColumn: dim_anio.anio

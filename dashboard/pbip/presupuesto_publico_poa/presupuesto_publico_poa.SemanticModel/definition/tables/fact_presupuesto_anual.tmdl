@@ -1,0 +1,156 @@
+table fact_presupuesto_anual
+	lineageTag: 6ef83cf9-8c0b-58d2-a335-71431e1d38dc
+
+	column anio
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8b1a7cd1-2e8f-50df-9750-72877be50b5b
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column entidad_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0a0a6ea8-cea7-5a61-b1ff-00529f1574e9
+		summarizeBy: none
+		sourceColumn: entidad_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column funcion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9024be7a-6fe9-5dd5-b278-300dff5716d5
+		summarizeBy: none
+		sourceColumn: funcion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1dd7b0e4-9ed0-5982-9dde-e85d5b88b3d4
+		summarizeBy: none
+		sourceColumn: fuente_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ceb0d4df-46b0-5e3d-9bd5-26ce5d5636bf
+		summarizeBy: none
+		sourceColumn: categoria_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_intervencion_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1d609ff1-add3-54ac-ad12-214672e8563e
+		summarizeBy: none
+		sourceColumn: tipo_intervencion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b6679ae1-5d77-53ae-8e75-b0f5ae133bb2
+		summarizeBy: none
+		sourceColumn: departamento_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column programa_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4686c78c-121e-5178-a4f9-cd4678134f3b
+		summarizeBy: none
+		sourceColumn: programa_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_pia
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 753fbe0b-30ce-5c65-9935-f380ef5749cd
+		summarizeBy: sum
+		sourceColumn: monto_pia
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_pim
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 4b035a24-33da-5b9e-b854-371dec0164fd
+		summarizeBy: sum
+		sourceColumn: monto_pim
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_certificado
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 7c55fde4-d7f3-5eab-8e83-af5c5f864f80
+		summarizeBy: sum
+		sourceColumn: monto_certificado
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_comprometido
+		dataType: double
+		formatString: #,0.00
+		lineageTag: cbef221c-98eb-518a-bf8c-30a65c81ece0
+		summarizeBy: sum
+		sourceColumn: monto_comprometido
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_devengado
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8fcbb7ab-9977-5b88-be9b-beb12f5f4487
+		summarizeBy: sum
+		sourceColumn: monto_devengado
+
+		annotation SummarizationSetBy = Automatic
+
+	column monto_girado
+		dataType: double
+		formatString: #,0.00
+		lineageTag: d4390a32-1e8e-560a-baea-01551ee8e94e
+		summarizeBy: sum
+		sourceColumn: monto_girado
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_lineas
+		dataType: int64
+		formatString: 0
+		lineageTag: b7e8bdf4-4765-5ed3-8054-fc89e27faf02
+		summarizeBy: sum
+		sourceColumn: n_lineas
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_presupuesto_anual = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "fact_presupuesto_anual.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

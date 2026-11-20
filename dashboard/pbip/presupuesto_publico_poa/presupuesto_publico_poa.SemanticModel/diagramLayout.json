@@ -1,0 +1,308 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1406.4596190076968,
+            "y": 530.45672622118718
+          },
+          "nodeIndex": "_Medidas",
+          "nodeLineageTag": "f9a0b770-1fe6-5f7f-9781-d1c4fea11269",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 595.08857222146207
+          },
+          "nodeIndex": "dim_anio",
+          "nodeLineageTag": "8b32e027-9952-562d-8b6d-d7b391616082",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 155.64014656627171,
+            "y": 241.42170670275118
+          },
+          "nodeIndex": "dim_calendario",
+          "nodeLineageTag": "0a96a220-e89b-55d9-901e-ef05d162692a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 711.9011757064618,
+            "y": 1010.9134524423746
+          },
+          "nodeIndex": "dim_categoria_gasto",
+          "nodeLineageTag": "5c225155-9b78-571a-91a6-ae05f8877902",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 442.68637849044609,
+            "y": 220.96986599355637
+          },
+          "nodeIndex": "dim_departamento",
+          "nodeLineageTag": "438fe283-2c8a-50db-ab95-4a2725eb8922",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1013.5995099076108,
+            "y": -50
+          },
+          "nodeIndex": "dim_entidad",
+          "nodeLineageTag": "cd75529e-5492-5b5c-b98f-5202c05e686b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1690.4596190076968,
+            "y": 616.45672622118718
+          },
+          "nodeIndex": "dim_etapa",
+          "nodeLineageTag": "2fea74f4-2b6e-5a1d-a2a5-ebb0ade0ea37",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 355.69675206914957,
+            "y": 954.896512991628
+          },
+          "nodeIndex": "dim_fuente_financiamiento",
+          "nodeLineageTag": "a6e7ac42-6c17-523e-81e2-f424015f0e86",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1172.459619007697,
+            "y": 302.92184358490385
+          },
+          "nodeIndex": "dim_funcion",
+          "nodeLineageTag": "62270e20-617c-5c39-8670-2a1827476be8",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1016.3591228362234,
+            "y": 635.1398300129506
+          },
+          "nodeIndex": "dim_tipo_intervencion",
+          "nodeLineageTag": "0e3b06f4-39cf-514f-9cd7-9ef7b61bd358",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 729.339297243351,
+            "y": 303.66240279283886
+          },
+          "nodeIndex": "fact_gasto_mensual",
+          "nodeLineageTag": "e0cd4842-0e53-53b9-820c-6293f7b686dd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 642.68783981841921,
+            "y": 657.2303970845735
+          },
+          "nodeIndex": "fact_presupuesto_anual",
+          "nodeLineageTag": "6ef83cf9-8c0b-58d2-a335-71431e1d38dc",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1974.4596190076968,
+            "y": 530.45672622118718
+          },
+          "nodeIndex": "indicadores_poa",
+          "nodeLineageTag": "3fcd4235-f003-5b3a-bfbe-84e4e927b34c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2258.4596190076968,
+            "y": 532.45672622118718
+          },
+          "nodeIndex": "metas_sector_poa",
+          "nodeLineageTag": "366fd823-c4a7-5bb5-bcb0-6f27271274ac",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2542.4596190076968,
+            "y": 544.45672622118718
+          },
+          "nodeIndex": "programacion_poa",
+          "nodeLineageTag": "ffc83360-6d9f-526b-9e68-7bbf3f04ad39",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2776.4596190076968,
+            "y": 530.4567262211873
+          },
+          "nodeIndex": "atipicos_entidades",
+          "nodeLineageTag": "03c045d2-256a-5f45-a86c-96805fc26d71",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3060.4596190076968,
+            "y": 530.4567262211873
+          },
+          "nodeIndex": "clasificacion_entidades",
+          "nodeLineageTag": "1f88df74-f64e-5363-a6dd-7551630c29ce",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3344.4596190076968,
+            "y": 580.4567262211873
+          },
+          "nodeIndex": "dim_programa_presupuestal",
+          "nodeLineageTag": "99dcc74b-0105-5bea-a3e2-3efa48c29245",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3628.4596190076968,
+            "y": 532.4567262211873
+          },
+          "nodeIndex": "estacionalidad_mensual",
+          "nodeLineageTag": "07a380ff-2732-5726-8af1-912b804c5d77",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3912.4596190076968,
+            "y": 532.4567262211873
+          },
+          "nodeIndex": "ley_2026_cuadre",
+          "nodeLineageTag": "fb25bec5-4f8d-589a-a8fd-e6b6737fcef1",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4196.4596190076973,
+            "y": 532.4567262211873
+          },
+          "nodeIndex": "proyeccion_mensual",
+          "nodeLineageTag": "1b6e3cc2-b64f-5090-a1ce-c6d0c819d50c",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4480.4596190076973,
+            "y": 532.4567262211873
+          },
+          "nodeIndex": "proyeccion_metodos",
+          "nodeLineageTag": "9eb77640-994e-59e1-868e-739dcd197dd5",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

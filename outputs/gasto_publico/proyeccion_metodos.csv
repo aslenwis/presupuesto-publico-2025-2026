@@ -1,0 +1,4 @@
+﻿metodo_codigo,metodo,devengado_proyectado,avance_proyectado,limite_inferior,limite_superior,parametro,error_prueba_base,es_metodo_oficial
+A,A. Estacional (calendario del año base),275115488591.7704,0.9449746358792256,,,,,True
+B,B. Tendencia lineal (MCO),260735894303.45782,0.8955831895951809,0.847728217508435,0.9434381616819267,90871016.21982053,-0.0380952038618263,False
+C,C. Regresión sobre el año base (β),274997688726.88837,0.9445700134968461,0.918107526761637,0.9710325002320552,1.082348449048253,,False

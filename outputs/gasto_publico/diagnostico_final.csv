@@ -1,0 +1,6 @@
+﻿Problema,Cuantificación,Impacto,Acción
+Líneas sin ningún monto,"336,134 líneas",Ninguno en sumas; inflan el conteo de líneas,Excluir en Silver y contarlas
+"Textos con espacios dobles, bordes y minúsculas","14,954,830 celdas",Un mismo nombre aparecería dos veces en los segmentadores,Normalizar en Silver
+Extornos (devengado negativo),"133,928 registros · S/ 2,480.8 M",Reducen el devengado de meses posteriores,Conservar; separar en monto_extorno
+"Devengado > PIM por línea (PIM en la línea principal, devengado en la sub cuenta)","1,566,580 líneas → 9 combinaciones al grano Gold",Avances de 'infinito %' si se analiza por tipo de recurso,No usar tipo_recurso en Gold; medir avance desde el rubro hacia arriba
+2026 es un año en curso,Datos hasta octubre,Comparar años completos con años en curso exagera la caída,Comparar a igual corte (dim_anio.mes_corte_comparable)

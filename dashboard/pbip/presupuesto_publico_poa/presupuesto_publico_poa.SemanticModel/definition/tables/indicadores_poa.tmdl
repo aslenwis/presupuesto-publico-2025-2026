@@ -1,0 +1,230 @@
+table indicadores_poa
+	lineageTag: 3fcd4235-f003-5b3a-bfbe-84e4e927b34c
+
+	column orden
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9ed7905e-1ddc-57ca-9965-b4bc91b82724
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column objetivo_codigo
+		dataType: string
+		lineageTag: c0f39f95-6db3-523e-9ba2-1df16e72d975
+		summarizeBy: none
+		sourceColumn: objetivo_codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column objetivo_operativo
+		dataType: string
+		lineageTag: 8e72f450-ef31-55c9-9475-1155ba567439
+		summarizeBy: none
+		sourceColumn: objetivo_operativo
+
+		annotation SummarizationSetBy = Automatic
+
+	column resultado_esperado
+		dataType: string
+		lineageTag: 87190408-3d9e-5b65-a4a8-5e7d508afc9c
+		summarizeBy: none
+		sourceColumn: resultado_esperado
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo
+		dataType: string
+		lineageTag: a97cf544-5b84-5036-80d1-1985bc1c25d0
+		summarizeBy: none
+		sourceColumn: codigo
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column indicador
+		dataType: string
+		lineageTag: 2d2b7696-f9f6-5302-9c0f-ec2aea58582d
+		summarizeBy: none
+		sourceColumn: indicador
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column objetivo
+		dataType: string
+		lineageTag: dc37dbb6-4ecf-5a02-8b40-e852f487d39f
+		summarizeBy: none
+		sourceColumn: objetivo
+
+		annotation SummarizationSetBy = Automatic
+
+	column formula
+		dataType: string
+		lineageTag: bbf3c1d6-27a0-521f-9015-36a531d23e97
+		summarizeBy: none
+		sourceColumn: formula
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidad
+		dataType: string
+		lineageTag: a4f7389a-bfac-5fc4-9a80-d30ff45d2305
+		summarizeBy: none
+		sourceColumn: unidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentido
+		dataType: string
+		lineageTag: 4b5c1644-6af8-5555-a11b-2e5efb92a61f
+		summarizeBy: none
+		sourceColumn: sentido
+
+		annotation SummarizationSetBy = Automatic
+
+	column frecuencia
+		dataType: string
+		lineageTag: 4626b4cf-47fe-5edc-a4e3-80d184df7929
+		summarizeBy: none
+		sourceColumn: frecuencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente
+		dataType: string
+		lineageTag: 95c98bf9-36b2-54f1-be98-30608c98ed33
+		summarizeBy: none
+		sourceColumn: fuente
+
+		annotation SummarizationSetBy = Automatic
+
+	column linea_base
+		dataType: double
+		formatString: 0.0%
+		lineageTag: e5c89bcb-9ccd-54a3-beda-b1e46299f2f8
+		summarizeBy: none
+		sourceColumn: linea_base
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_al_corte
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 2effca11-a508-59db-9e6a-5d730d1cd66b
+		summarizeBy: none
+		sourceColumn: valor_al_corte
+
+		annotation SummarizationSetBy = Automatic
+
+	column proyeccion_cierre
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 6247ff1c-206c-541c-97ec-5f27cee51f61
+		summarizeBy: none
+		sourceColumn: proyeccion_cierre
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_anio_seg
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 0f2921c1-c8f2-5343-b836-9f716d04001d
+		summarizeBy: none
+		sourceColumn: meta_anio_seg
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_poa
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 7157eb7a-e9ed-518f-abff-ea6521b38581
+		summarizeBy: none
+		sourceColumn: meta_poa
+
+		annotation SummarizationSetBy = Automatic
+
+	column brecha_proyeccion_pp
+		dataType: double
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: eae863c7-5229-56bc-8f04-5d5d712b35cf
+		summarizeBy: none
+		sourceColumn: brecha_proyeccion_pp
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: 57fea728-b9e8-5319-bceb-0a82b6880574
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column color_estado
+		dataType: string
+		isHidden
+		lineageTag: 3ddc6cce-7173-5d07-a980-4fcd30700fa1
+		summarizeBy: none
+		sourceColumn: color_estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column accion_mejora
+		dataType: string
+		lineageTag: 1770f734-87c2-5e2a-8c2a-1757737468b4
+		summarizeBy: none
+		sourceColumn: accion_mejora
+
+		annotation SummarizationSetBy = Automatic
+
+	column responsable
+		dataType: string
+		lineageTag: d0545352-e01a-5406-85f8-8e94946b1db3
+		summarizeBy: none
+		sourceColumn: responsable
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_base
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4dcbae0d-d21d-5c60-b7a4-1e93db2fea80
+		summarizeBy: none
+		sourceColumn: anio_base
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_seguimiento
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4f55670a-867a-52b1-8c61-0bb0038fc0f7
+		summarizeBy: none
+		sourceColumn: anio_seguimiento
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_poa
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4d00f615-733f-5931-80cf-aa9767afc55b
+		summarizeBy: none
+		sourceColumn: anio_poa
+
+		annotation SummarizationSetBy = Automatic
+
+	partition indicadores_poa = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "indicadores_poa.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

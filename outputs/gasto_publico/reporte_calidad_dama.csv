@@ -1,0 +1,33 @@
+﻿Año,Nivel,Dimensión,Regla,Evaluadas,Incumplimientos,% cumplimiento,Monto involucrado (S/),Impacto
+2025,línea,Completitud,celdas de texto sin nulos,141970050,6794668,95.214,,Se muestran como 'NO DEFINIDO' en Gold
+2025,línea,Unicidad,sin filas duplicadas exactas,2629075,0,100.0,,Duplicarían montos en el dashboard
+2025,línea,Unicidad,clave de línea única,2629075,130,99.995,,Misma línea registrada dos veces con otros montos
+2025,línea,Validez,monto_pia ≥ 0,2629075,0,100.0,,Un presupuesto negativo no tiene sentido
+2025,línea,Validez,monto_pim ≥ 0,2629075,5,100.0,,Un presupuesto negativo no tiene sentido
+2025,línea,Consistencia,Certificado ≤ PIM,2629075,5096,99.806,704913277.36,Rompe el orden del ciclo del gasto
+2025,línea,Consistencia,Comprometido ≤ Certificado,2629075,16,99.999,103323.29,Rompe el orden del ciclo del gasto
+2025,línea,Consistencia,Devengado ≤ Comprometido,2629075,855912,67.444,92568999289.99,Rompe el orden del ciclo del gasto
+2025,línea,Consistencia,Girado ≤ Devengado,2629075,347,99.987,1785502.45,Rompe el orden del ciclo del gasto
+2025,línea,Consistencia,Devengado ≤ PIM,2629075,857378,67.389,92955863101.29,Rompe el orden del ciclo del gasto
+2025,línea,Consistencia,Σ meses = devengado anual,2629075,0,100.0,,Mensual y anual no cuadrarían
+2026,línea,Completitud,celdas de texto sin nulos,131680674,6219394,95.277,,Se muestran como 'NO DEFINIDO' en Gold
+2026,línea,Unicidad,sin filas duplicadas exactas,2438531,0,100.0,,Duplicarían montos en el dashboard
+2026,línea,Unicidad,clave de línea única,2438531,122,99.995,,Misma línea registrada dos veces con otros montos
+2026,línea,Validez,monto_pia ≥ 0,2438531,0,100.0,,Un presupuesto negativo no tiene sentido
+2026,línea,Validez,monto_pim ≥ 0,2438531,2,100.0,,Un presupuesto negativo no tiene sentido
+2026,línea,Consistencia,Certificado ≤ PIM,2438531,4519,99.815,1596115255.16,Rompe el orden del ciclo del gasto
+2026,línea,Consistencia,Comprometido ≤ Certificado,2438531,6,100.0,202582.67,Rompe el orden del ciclo del gasto
+2026,línea,Consistencia,Devengado ≤ Comprometido,2438531,708106,70.962,80142577355.55,Rompe el orden del ciclo del gasto
+2026,línea,Consistencia,Girado ≤ Devengado,2438531,0,100.0,0.0,Rompe el orden del ciclo del gasto
+2026,línea,Consistencia,Devengado ≤ PIM,2438531,709202,70.917,81334116547.91,Rompe el orden del ciclo del gasto
+2026,línea,Consistencia,Σ meses = devengado anual,2438531,0,100.0,,Mensual y anual no cuadrarían
+2025,grano Gold,Consistencia,Certificado ≤ PIM,166660,8,99.995,694958.69,Avance > 100 % en el dashboard
+2025,grano Gold,Consistencia,Comprometido ≤ Certificado,166660,5,99.997,12009.94,Avance > 100 % en el dashboard
+2025,grano Gold,Consistencia,Devengado ≤ Comprometido,166660,10,99.994,153534.91,Avance > 100 % en el dashboard
+2025,grano Gold,Consistencia,Girado ≤ Devengado,166660,152,99.909,1613303.89,Avance > 100 % en el dashboard
+2025,grano Gold,Consistencia,Devengado ≤ PIM,166660,9,99.995,657914.49,Avance > 100 % en el dashboard
+2026,grano Gold,Consistencia,Certificado ≤ PIM,170093,1,99.999,400.0,Avance > 100 % en el dashboard
+2026,grano Gold,Consistencia,Comprometido ≤ Certificado,170093,2,99.999,5602.8,Avance > 100 % en el dashboard
+2026,grano Gold,Consistencia,Devengado ≤ Comprometido,170093,1,99.999,100000.0,Avance > 100 % en el dashboard
+2026,grano Gold,Consistencia,Girado ≤ Devengado,170093,0,100.0,0.0,Avance > 100 % en el dashboard
+2026,grano Gold,Consistencia,Devengado ≤ PIM,170093,0,100.0,0.0,Avance > 100 % en el dashboard

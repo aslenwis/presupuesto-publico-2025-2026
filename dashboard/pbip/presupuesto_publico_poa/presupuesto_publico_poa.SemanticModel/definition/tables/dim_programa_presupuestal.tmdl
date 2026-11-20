@@ -1,0 +1,55 @@
+table dim_programa_presupuestal
+	lineageTag: 99dcc74b-0105-5bea-a3e2-3efa48c29245
+
+	column programa_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2c7f1eac-1205-5d17-aeac-7acefe45e4e1
+		summarizeBy: none
+		sourceColumn: programa_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column programa_ppto
+		dataType: string
+		lineageTag: 2a383458-a7d5-5be4-b5ec-84df0f20f9c2
+		summarizeBy: none
+		sourceColumn: programa_ppto
+
+		annotation SummarizationSetBy = Automatic
+
+	column programa_ppto_nombre
+		dataType: string
+		lineageTag: c4c8810b-3535-5aff-b637-a16b797dec9b
+		summarizeBy: none
+		sourceColumn: programa_ppto_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column programa_etiqueta
+		dataType: string
+		lineageTag: 4ddb54f1-6957-5be5-ab1d-1de5cc2079fb
+		summarizeBy: none
+		sourceColumn: programa_etiqueta
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_programa
+		dataType: string
+		lineageTag: ff6e47e4-6943-5f1d-b24f-2ebccb8f24c0
+		summarizeBy: none
+		sourceColumn: tipo_programa
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_programa_presupuestal = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_programa_presupuestal.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

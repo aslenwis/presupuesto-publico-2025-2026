@@ -1,0 +1,94 @@
+table proyeccion_mensual
+	lineageTag: 1b6e3cc2-b64f-5090-a1ce-c6d0c819d50c
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: d20a6d51-a89f-54bf-bc01-ba97ee18b9b6
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 49bdbbde-da42-5f24-863d-0d1ba4e16564
+		summarizeBy: none
+		sourceColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_abrev
+		dataType: string
+		lineageTag: 88435aaf-6c7b-51e2-aed0-7d2f097be90d
+		summarizeBy: none
+		sourceColumn: mes_abrev
+		sortByColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column real_acumulado
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 5d5bd3bc-62da-5969-a7ff-95fdc27490c6
+		summarizeBy: none
+		sourceColumn: real_acumulado
+
+		annotation SummarizationSetBy = Automatic
+
+	column proy_b
+		dataType: double
+		formatString: 0.0%
+		lineageTag: c5a73d2f-cf7f-59dc-8327-f2a745a5ade0
+		summarizeBy: none
+		sourceColumn: proy_b
+
+		annotation SummarizationSetBy = Automatic
+
+	column proy_c
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 2e3bed0c-cd01-5078-b55a-e723ba93dfde
+		summarizeBy: none
+		sourceColumn: proy_c
+
+		annotation SummarizationSetBy = Automatic
+
+	column proy_a
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 57829985-1c02-5276-b29a-36fe224b9d27
+		summarizeBy: none
+		sourceColumn: proy_a
+
+		annotation SummarizationSetBy = Automatic
+
+	column lim_inf_c
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 753d7efa-af33-5b50-b2cb-c2a1d3e5276f
+		summarizeBy: none
+		sourceColumn: lim_inf_c
+
+		annotation SummarizationSetBy = Automatic
+
+	column lim_sup_c
+		dataType: double
+		formatString: 0.0%
+		lineageTag: d526281c-49d6-59a7-a027-4d3d427863fa
+		summarizeBy: none
+		sourceColumn: lim_sup_c
+
+		annotation SummarizationSetBy = Automatic
+
+	partition proyeccion_mensual = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "proyeccion_mensual.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,28 @@
+table dim_etapa
+	lineageTag: 2fea74f4-2b6e-5a1d-a2a5-ebb0ade0ea37
+
+	column etapa
+		dataType: string
+		lineageTag: d32e368d-c84c-5231-84d3-6bdf851bd980
+		summarizeBy: none
+		sourceColumn: etapa
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 59f39f87-93e7-5e61-b4f8-0f662d39d9b9
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_etapa = m
+		mode: import
+		source =
+				#table(type table [etapa = text, orden = Int64.Type], {{"Certificado", 1}, {"Comprometido", 2}, {"Devengado", 3}, {"Girado", 4}})
+
+	annotation PBI_ResultType = Table

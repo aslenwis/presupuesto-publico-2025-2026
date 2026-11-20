@@ -1,0 +1,39 @@
+table dim_departamento
+	lineageTag: 438fe283-2c8a-50db-ab95-4a2725eb8922
+
+	column departamento_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a386eacc-3c44-54dd-a9f7-060303945bf5
+		summarizeBy: none
+		sourceColumn: departamento_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento_meta
+		dataType: string
+		lineageTag: 97968dfe-2322-5e31-8f80-ab33d3e26bf7
+		summarizeBy: none
+		sourceColumn: departamento_meta
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento_meta_nombre
+		dataType: string
+		lineageTag: 0c8e5c67-ed1e-5222-9c48-2657b3c1df10
+		summarizeBy: none
+		sourceColumn: departamento_meta_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_departamento = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_departamento.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

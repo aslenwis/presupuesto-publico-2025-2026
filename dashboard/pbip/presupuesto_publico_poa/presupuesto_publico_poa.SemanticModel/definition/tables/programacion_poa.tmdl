@@ -1,0 +1,83 @@
+table programacion_poa
+	lineageTag: ffc83360-6d9f-526b-9e68-7bbf3f04ad39
+
+	column serie
+		dataType: string
+		lineageTag: f22418dc-2df0-545f-aa60-550e1fef3714
+		summarizeBy: none
+		sourceColumn: serie
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: 228673b3-eb03-5466-9569-4ddd18a10956
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column serie_etiqueta
+		dataType: string
+		lineageTag: a4e20b88-eee9-5b19-a945-b9bf2ed2a570
+		summarizeBy: none
+		sourceColumn: serie_etiqueta
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fe250c2-8032-5d7b-ba49-e749d4ab3c2d
+		summarizeBy: none
+		sourceColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_abrev
+		dataType: string
+		lineageTag: 551de461-2ca3-50c1-a07c-e5b4b6d12394
+		summarizeBy: none
+		sourceColumn: mes_abrev
+		sortByColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column avance_acumulado
+		dataType: double
+		formatString: 0.0%
+		lineageTag: c0e97320-7959-591a-a283-65b0a74b999c
+		summarizeBy: none
+		sourceColumn: avance_acumulado
+
+		annotation SummarizationSetBy = Automatic
+
+	column pim_referencial
+		dataType: double
+		formatString: #,0,,.0
+		lineageTag: eaa8fafb-2023-594e-98a8-3c45aff24100
+		summarizeBy: none
+		sourceColumn: pim_referencial
+
+		annotation SummarizationSetBy = Automatic
+
+	column devengado_programado
+		dataType: double
+		formatString: #,0,,.0
+		lineageTag: ee6c21c6-2b9a-5bd4-9e43-7a6b2e2f2e08
+		summarizeBy: none
+		sourceColumn: devengado_programado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition programacion_poa = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "programacion_poa.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

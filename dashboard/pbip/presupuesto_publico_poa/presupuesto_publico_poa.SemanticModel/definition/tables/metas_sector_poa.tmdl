@@ -1,0 +1,100 @@
+table metas_sector_poa
+	lineageTag: 366fd823-c4a7-5bb5-bcb0-6f27271274ac
+
+	column sector
+		dataType: string
+		lineageTag: acafa58e-3fed-5234-93e3-4365731bd159
+		summarizeBy: none
+		sourceColumn: sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column pim_anio_seg
+		dataType: double
+		formatString: #,0,,.0
+		lineageTag: 3b4d5367-53af-5986-8bf4-3a95940f514c
+		summarizeBy: none
+		sourceColumn: pim_anio_seg
+
+		annotation SummarizationSetBy = Automatic
+
+	column avance_base
+		dataType: double
+		formatString: 0.0%
+		lineageTag: f126bde2-15f9-559c-81e7-8f2770bfbc27
+		summarizeBy: none
+		sourceColumn: avance_base
+
+		annotation SummarizationSetBy = Automatic
+
+	column avance_al_corte
+		dataType: double
+		formatString: 0.0%
+		lineageTag: f1874a1a-b3cb-53b3-a6d5-33479fb85f05
+		summarizeBy: none
+		sourceColumn: avance_al_corte
+
+		annotation SummarizationSetBy = Automatic
+
+	column proyeccion_cierre
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 9fc6344b-3a6b-5d1d-bd69-9fd9c5b706af
+		summarizeBy: none
+		sourceColumn: proyeccion_cierre
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_poa
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 95c5e236-6111-56b6-b639-793eebb6763c
+		summarizeBy: none
+		sourceColumn: meta_poa
+
+		annotation SummarizationSetBy = Automatic
+
+	column brecha_proyeccion_pp
+		dataType: double
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 6664b32d-d95d-565d-af8f-f61a46d66c86
+		summarizeBy: none
+		sourceColumn: brecha_proyeccion_pp
+
+		annotation SummarizationSetBy = Automatic
+
+	column prioridad
+		dataType: string
+		lineageTag: 7f10044a-6dfe-5db9-ad38-8f3637c6359a
+		summarizeBy: none
+		sourceColumn: prioridad
+
+		annotation SummarizationSetBy = Automatic
+
+	column accion_sugerida
+		dataType: string
+		lineageTag: 88c1652d-30b7-5f47-8c40-180611a96971
+		summarizeBy: none
+		sourceColumn: accion_sugerida
+
+		annotation SummarizationSetBy = Automatic
+
+	column color_prioridad
+		dataType: string
+		isHidden
+		lineageTag: 1fb0e4db-d5f7-59d8-8a8f-c176da387ec2
+		summarizeBy: none
+		sourceColumn: color_prioridad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition metas_sector_poa = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "metas_sector_poa.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

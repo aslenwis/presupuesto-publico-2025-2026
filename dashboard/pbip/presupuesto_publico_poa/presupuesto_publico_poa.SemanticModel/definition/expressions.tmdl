@@ -1,0 +1,5 @@
+expression RutaGold = "D:\Cursos\Costos\presupuesto_publico_poa\data\gold\gasto_publico\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 99576e75-e912-561b-a99d-5e2103b149c9
+
+	annotation PBI_ResultType = Text
+

@@ -1,0 +1,55 @@
+table dim_fuente_financiamiento
+	lineageTag: a6e7ac42-6c17-523e-81e2-f424015f0e86
+
+	column fuente_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 59de9d92-687a-596d-b16d-6d5e173828a7
+		summarizeBy: none
+		sourceColumn: fuente_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente_financiamiento
+		dataType: string
+		lineageTag: b703875c-1442-5ed0-92d0-63a573897e02
+		summarizeBy: none
+		sourceColumn: fuente_financiamiento
+
+		annotation SummarizationSetBy = Automatic
+
+	column rubro
+		dataType: string
+		lineageTag: 2b24933f-ae95-5dfe-888e-40d3325d331f
+		summarizeBy: none
+		sourceColumn: rubro
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente_financiamiento_nombre
+		dataType: string
+		lineageTag: 72d56861-78f2-5979-8f45-eb20a4041454
+		summarizeBy: none
+		sourceColumn: fuente_financiamiento_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column rubro_nombre
+		dataType: string
+		lineageTag: b3f5450c-e704-52c2-9d33-72d25e302791
+		summarizeBy: none
+		sourceColumn: rubro_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_fuente_financiamiento = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_fuente_financiamiento.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,146 @@
+table dim_entidad
+	lineageTag: cd75529e-5492-5b5c-b98f-5202c05e686b
+
+	column entidad_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 083f4abe-e062-57ba-ae97-0cb17ee5bb4f
+		summarizeBy: none
+		sourceColumn: entidad_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column sec_ejec
+		dataType: string
+		lineageTag: 0ba194da-41b2-57ed-b9ca-af4d5b1eaa5f
+		summarizeBy: none
+		sourceColumn: sec_ejec
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel_gobierno
+		dataType: string
+		lineageTag: b8df95c6-e0ec-532a-9cb3-55d7f1d02a4f
+		summarizeBy: none
+		sourceColumn: nivel_gobierno
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel_gobierno_nombre
+		dataType: string
+		lineageTag: 938054df-3c77-5bdd-8ca3-85c007990512
+		summarizeBy: none
+		sourceColumn: nivel_gobierno_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column sector
+		dataType: string
+		lineageTag: f741ff95-7920-5c86-8689-99023fa35817
+		summarizeBy: none
+		sourceColumn: sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column sector_nombre
+		dataType: string
+		lineageTag: 08bea58e-1950-52fd-beb3-b4fcbfcd4c33
+		summarizeBy: none
+		sourceColumn: sector_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column pliego
+		dataType: string
+		lineageTag: 95fe8634-9226-59b7-b3d4-59c94d76588c
+		summarizeBy: none
+		sourceColumn: pliego
+
+		annotation SummarizationSetBy = Automatic
+
+	column pliego_nombre
+		dataType: string
+		lineageTag: 0023a32e-7c96-5df9-919c-607b7ce1ac17
+		summarizeBy: none
+		sourceColumn: pliego_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column ejecutora
+		dataType: string
+		lineageTag: 45b7a202-e9b7-5083-96f1-e0f60f7271e9
+		summarizeBy: none
+		sourceColumn: ejecutora
+
+		annotation SummarizationSetBy = Automatic
+
+	column ejecutora_nombre
+		dataType: string
+		lineageTag: 122d2a7a-8e20-555f-9ef6-efdd49434d65
+		summarizeBy: none
+		sourceColumn: ejecutora_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento_ejecutora_nombre
+		dataType: string
+		lineageTag: fd3f7c35-e279-5143-b719-d58efdd81ad2
+		summarizeBy: none
+		sourceColumn: departamento_ejecutora_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column provincia_ejecutora_nombre
+		dataType: string
+		lineageTag: 34ef5d00-9477-5203-ac92-80f6d4d22342
+		summarizeBy: none
+		sourceColumn: provincia_ejecutora_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column distrito_ejecutora_nombre
+		dataType: string
+		lineageTag: 3eed9b7c-6221-5d97-a5c5-d8c926a8029a
+		summarizeBy: none
+		sourceColumn: distrito_ejecutora_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column ejecutora_etiqueta
+		dataType: string
+		lineageTag: 923be453-bd4e-5270-a71d-72e96934fc71
+		summarizeBy: none
+		sourceColumn: ejecutora_etiqueta
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Jerarquia entidad'
+		lineageTag: 1c17a24f-3f36-5080-99da-4b8e2b424e78
+
+		level 'Nivel de gobierno'
+			lineageTag: 4054b212-f47a-5f53-9b7e-565d23caf41a
+			column: nivel_gobierno_nombre
+
+		level 'Sector'
+			lineageTag: 19f52267-422f-5461-93ac-feb41a87844c
+			column: sector_nombre
+
+		level 'Pliego'
+			lineageTag: 158b1a70-e2de-5621-b57c-f2aaf71718d0
+			column: pliego_nombre
+
+		level 'Ejecutora'
+			lineageTag: 01c1c065-f5e6-56e6-9c5d-6f5f1e2cb5d7
+			column: ejecutora_etiqueta
+
+	partition dim_entidad = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_entidad.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,118 @@
+table atipicos_entidades
+	lineageTag: 03c045d2-256a-5f45-a86c-96805fc26d71
+
+	column anio
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7b6700f6-97b5-5908-bf6f-1daec0e3aad0
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column entidad_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9fad62e3-7c1f-5eb1-9642-3a73b9c39e4d
+		summarizeBy: none
+		sourceColumn: entidad_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable
+		dataType: string
+		lineageTag: 72a9e189-8f58-524a-8651-da956ddffa0e
+		summarizeBy: none
+		sourceColumn: variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidad
+		dataType: string
+		lineageTag: a82d21ed-79f9-506a-921c-15f2a53141e8
+		summarizeBy: none
+		sourceColumn: unidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 58388f24-3e7a-576b-a436-bbf7ae6eea24
+		summarizeBy: none
+		sourceColumn: valor
+
+		annotation SummarizationSetBy = Automatic
+
+	column mediana_grupo
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 6b8592fc-da2d-533a-8f36-1fc94fd798d0
+		summarizeBy: none
+		sourceColumn: mediana_grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_inferior
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 357ac55e-d31e-5f22-8acb-007d926512eb
+		summarizeBy: none
+		sourceColumn: limite_inferior
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_superior
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 153cc5d4-3b82-5ed9-9c69-6ffdac3e2420
+		summarizeBy: none
+		sourceColumn: limite_superior
+
+		annotation SummarizationSetBy = Automatic
+
+	column z_robusta
+		dataType: double
+		formatString: +0.0;-0.0;0.0
+		lineageTag: a2d09d30-1673-5e63-b639-aaf0de6137e3
+		summarizeBy: none
+		sourceColumn: z_robusta
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo
+		dataType: string
+		lineageTag: 8760e63d-6771-509a-b1ac-16a7c7b4bb46
+		summarizeBy: none
+		sourceColumn: tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column tecnica
+		dataType: string
+		lineageTag: 01eb64b7-92b4-5ba7-9d8f-c70d6509b424
+		summarizeBy: none
+		sourceColumn: tecnica
+
+		annotation SummarizationSetBy = Automatic
+
+	column severidad
+		dataType: string
+		lineageTag: 69d457b6-2dcd-5f8c-99f4-70488560b164
+		summarizeBy: none
+		sourceColumn: severidad
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atipicos_entidades = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "atipicos_entidades.parquet")),
+				    Resultado = Origen
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

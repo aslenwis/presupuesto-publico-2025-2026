@@ -1,0 +1,682 @@
+table _Medidas
+	lineageTag: f9a0b770-1fe6-5f7f-9781-d1c4fea11269
+
+	measure 'PIA' = SUM ( fact_presupuesto_anual[monto_pia] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: 554d9928-e56f-5745-af9f-0f0b99def0d7
+
+	measure 'PIM' = SUM ( fact_presupuesto_anual[monto_pim] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: c2174aa4-4faa-5d49-9109-e6b734903316
+
+	measure 'Certificado' = SUM ( fact_presupuesto_anual[monto_certificado] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: fe15a55b-1094-5981-87dc-3503b79544f2
+
+	measure 'Comprometido' = SUM ( fact_presupuesto_anual[monto_comprometido] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: f8fd1ce6-4d50-5828-99ec-b9485cdaafcc
+
+	measure 'Devengado Anual' = SUM ( fact_presupuesto_anual[monto_devengado] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: 16fdc079-4d41-5aaf-9c21-20354173a08a
+
+	measure 'Girado' = SUM ( fact_presupuesto_anual[monto_girado] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: a6d3eb34-d41e-5065-a78f-fd5d49a0d95f
+
+	measure 'Devengado' = SUM ( fact_gasto_mensual[monto_devengado] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: 4eb00b46-902b-533f-89e6-ba6a03110c8b
+
+	measure 'Extornos' = SUM ( fact_gasto_mensual[monto_extorno] )
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: 508e7564-dfb2-51be-b480-c3736131acbd
+
+	measure 'Saldo por Ejecutar' = [PIM] - [Devengado Anual]
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: fc04314f-b3d2-5709-96f4-e145efdbba18
+
+	measure 'Certificado sin Devengar' = [Certificado] - [Devengado Anual]
+		formatString: #,0
+		displayFolder: 1 Montos
+		lineageTag: 7b20fc34-ae49-5d18-b6a5-b4a11de29d55
+
+	measure 'Mes Corte Comparable' = CALCULATE ( MAX ( dim_anio[mes_corte_comparable] ), REMOVEFILTERS ( dim_anio ) )
+		formatString: 0
+		displayFolder: 2 Tiempo
+		lineageTag: 3ebfc581-a815-570b-a1e3-4d17208c9419
+
+	measure 'Mes Ultimo Dato' = LOOKUPVALUE ( dim_anio[mes_ultimo_dato], dim_anio[anio], MAX ( dim_anio[anio] ) )
+		formatString: 0
+		displayFolder: 2 Tiempo
+		lineageTag: 1e9aa632-abf9-5105-9513-a24de9644955
+
+	measure 'Devengado Acumulado' = ```
+			VAR _anio = MAX ( dim_calendario[anio] )
+			VAR _ultimo = LOOKUPVALUE ( dim_anio[mes_ultimo_dato], dim_anio[anio], _anio )
+			VAR _mesMax = MIN ( MAX ( dim_calendario[mes_num] ), _ultimo )
+			RETURN
+			    IF (
+			        MIN ( dim_calendario[mes_num] ) > _ultimo,
+			        BLANK (),
+			        CALCULATE ( [Devengado], REMOVEFILTERS ( dim_calendario ), dim_calendario[anio] = _anio, dim_calendario[mes_num] <= _mesMax )
+			    )
+			```
+		formatString: #,0
+		displayFolder: 2 Tiempo
+		lineageTag: 7ef44e97-4d87-530d-a9af-f736e066ac31
+
+	measure 'Devengado Acumulado AA' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			VAR _mes = MAX ( dim_calendario[mes_num] )
+			RETURN
+			    CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), REMOVEFILTERS ( dim_calendario ), dim_anio[anio] = _anio - 1, dim_calendario[mes_num] <= _mes )
+			```
+		formatString: #,0
+		displayFolder: 2 Tiempo
+		lineageTag: f892ff16-2a98-5cad-ba5b-e42573896a89
+
+	measure 'Devengado AA' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			RETURN
+			    CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = _anio - 1 )
+			```
+		formatString: #,0
+		displayFolder: 2 Tiempo
+		lineageTag: 88c6c88a-4541-535f-b0eb-03cb47e2e12b
+
+	measure 'Texto Corte' = ```
+			VAR _f = MAX ( dim_anio[fecha_ultimo_dato] )
+			VAR _c = [Mes Corte Comparable]
+			RETURN
+			    "Datos al cierre de " & FORMAT ( _f, "mmmm yyyy" ) & "   |   Comparación interanual: enero a " & FORMAT ( DATE ( 2000, _c, 1 ), "mmmm" )
+			```
+		displayFolder: 2 Tiempo
+		lineageTag: 69415f90-2ebe-529f-887f-2c3c17c4f44e
+
+	measure 'Avance %' = DIVIDE ( [Devengado Acumulado], [PIM] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: ae48b30f-3a97-5e50-a24a-42cc46f84120
+
+	measure 'Avance Anual %' = DIVIDE ( [Devengado Anual], [PIM] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 6ba5009e-ec22-5a77-b39d-c2247b4c544f
+
+	measure 'Certificacion %' = DIVIDE ( [Certificado], [PIM] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 47bccd32-2a5a-5a8a-b0b5-a3ba9d846dd2
+
+	measure 'Compromiso %' = DIVIDE ( [Comprometido], [PIM] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 69facd0f-f694-5ab4-a3a7-b0d20d47ea82
+
+	measure 'Girado sobre PIM %' = DIVIDE ( [Girado], [PIM] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: df368269-59a1-52cd-abce-d01d3e3362a4
+
+	measure 'Girado sobre Dev. %' = DIVIDE ( [Girado], [Devengado Anual] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 267623f9-1c60-5fce-87cc-5a3972efe624
+
+	measure 'Modificacion PIM %' = DIVIDE ( [PIM] - [PIA], [PIA] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 3 Avance
+		lineageTag: 6408cb2f-f752-57e9-9b77-0e6e86f9a152
+
+	measure 'Extornos %' = DIVIDE ( - [Extornos], [Devengado] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 63e02bf0-c73b-5096-8b27-1153278efcdf
+
+	measure 'Avance AA %' = DIVIDE ( [Devengado Acumulado AA], [PIM AA] )
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 7b6cd917-f77c-51d8-a440-bd2423e2f360
+
+	measure 'Etapa %' = ```
+			SWITCH (
+			    SELECTEDVALUE ( dim_etapa[etapa] ),
+			    "Certificado", [Certificacion %],
+			    "Comprometido", [Compromiso %],
+			    "Devengado", [Avance Anual %],
+			    "Girado", [Girado sobre PIM %]
+			)
+			```
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: a75e8f48-bc52-5e9d-94e0-b02281f48d32
+
+	measure 'Etapa AA %' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			RETURN
+			    CALCULATE ( [Etapa %], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = _anio - 1 )
+			```
+		formatString: 0.0%
+		displayFolder: 3 Avance
+		lineageTag: 1027fa1d-5b73-5ebf-a277-6abd4afcd6d4
+
+	measure 'Devengado Comparable' = ```
+			VAR _corte = [Mes Corte Comparable]
+			RETURN
+			    CALCULATE ( [Devengado], KEEPFILTERS ( dim_calendario[mes_num] <= _corte ) )
+			```
+		formatString: #,0
+		displayFolder: 4 Interanual
+		lineageTag: e9d17265-47f8-50a0-8c9c-a29ab3c25831
+
+	measure 'Devengado Comparable AA' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			VAR _corte = [Mes Corte Comparable]
+			VAR _meses = FILTER ( VALUES ( dim_calendario[mes_num] ), dim_calendario[mes_num] <= _corte )
+			RETURN
+			    CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), REMOVEFILTERS ( dim_calendario ), dim_anio[anio] = _anio - 1, _meses )
+			```
+		formatString: #,0
+		displayFolder: 4 Interanual
+		lineageTag: a8490ac4-6f1e-5db4-a04b-bb78413c7b99
+
+	measure 'Var Interanual %' = DIVIDE ( [Devengado Comparable] - [Devengado Comparable AA], [Devengado Comparable AA] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 4 Interanual
+		lineageTag: af1e8215-2ac5-5cec-b516-3df2a68a8469
+
+	measure 'Var Interanual S/' = [Devengado Comparable] - [Devengado Comparable AA]
+		formatString: #,0
+		displayFolder: 4 Interanual
+		lineageTag: 633f821e-23e7-5967-840c-24a2bd8810df
+
+	measure 'PIM AA' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			RETURN
+			    CALCULATE ( [PIM], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = _anio - 1 )
+			```
+		formatString: #,0
+		displayFolder: 4 Interanual
+		lineageTag: 948eb37e-de89-5826-84db-0f28cd4a94fe
+
+	measure 'Avance al Corte %' = DIVIDE ( [Devengado Comparable], [PIM] )
+		formatString: 0.0%
+		displayFolder: 4 Interanual
+		lineageTag: 337f6077-193b-57f1-b69c-c6e719c74562
+
+	measure 'Avance al Corte AA %' = DIVIDE ( [Devengado Comparable AA], [PIM AA] )
+		formatString: 0.0%
+		displayFolder: 4 Interanual
+		lineageTag: 6245d19a-eb51-5149-9383-1a9ad136ad40
+
+	measure 'Diferencia Avance pp' = [Avance al Corte %] - [Avance al Corte AA %]
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 4 Interanual
+		lineageTag: 5040dce8-cfb6-5797-a1f3-c2dc08b2919e
+
+	measure 'Devengado al Ultimo Mes' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			VAR _ult = LOOKUPVALUE ( dim_anio[mes_ultimo_dato], dim_anio[anio], _anio )
+			RETURN
+			    -- se conserva el año seleccionado: REMOVEFILTERS ( dim_calendario ) también quitaría el filtro de dim_anio
+			    CALCULATE ( [Devengado], REMOVEFILTERS ( dim_calendario ), dim_calendario[anio] = _anio, dim_calendario[mes_num] <= _ult )
+			```
+		formatString: #,0
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: afd808f1-0c75-5d2b-a80e-a425557022b7
+
+	measure 'Cuota Estacional AA' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			VAR _ult = LOOKUPVALUE ( dim_anio[mes_ultimo_dato], dim_anio[anio], _anio )
+			VAR _parcial = CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), REMOVEFILTERS ( dim_calendario ), dim_anio[anio] = _anio - 1, dim_calendario[mes_num] <= _ult )
+			VAR _total = CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), REMOVEFILTERS ( dim_calendario ), dim_anio[anio] = _anio - 1 )
+			RETURN
+			    DIVIDE ( _parcial, _total )
+			```
+		formatString: 0.0%
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: 2077fc3d-87e9-54a5-9564-afab2963d101
+
+	measure 'Devengado Proyectado' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			VAR _ult = LOOKUPVALUE ( dim_anio[mes_ultimo_dato], dim_anio[anio], _anio )
+			VAR _proy = IF ( _ult = 12, [Devengado al Ultimo Mes], DIVIDE ( [Devengado al Ultimo Mes], [Cuota Estacional AA] ) )
+			RETURN
+			    -- acotada al PIM: no se puede devengar más de lo presupuestado
+			    IF ( ISBLANK ( _proy ), BLANK (), MIN ( _proy, [PIM] ) )
+			```
+		formatString: #,0
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: 50d21998-682c-5e51-bbd5-b016e4627a09
+
+	measure 'Avance Proyectado %' = DIVIDE ( [Devengado Proyectado], [PIM] )
+		formatString: 0.0%
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: eea1f6a7-9c03-5b76-b0c1-dcaaa1133929
+
+	measure 'Avance Proyectado Mensual %' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			VAR _ult = LOOKUPVALUE ( dim_anio[mes_ultimo_dato], dim_anio[anio], _anio )
+			VAR _mes = MAX ( dim_calendario[mes_num] )
+			VAR _acumAA = CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), REMOVEFILTERS ( dim_calendario ), dim_anio[anio] = _anio - 1, dim_calendario[mes_num] <= _mes )
+			VAR _totalAA = CALCULATE ( [Devengado], REMOVEFILTERS ( dim_anio ), REMOVEFILTERS ( dim_calendario ), dim_anio[anio] = _anio - 1 )
+			RETURN
+			    IF ( _mes < _ult || _ult = 12, BLANK (), DIVIDE ( [Devengado Proyectado] * DIVIDE ( _acumAA, _totalAA ), [PIM] ) )
+			```
+		formatString: 0.0%
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: cb1272a9-50cf-5d7c-8691-84ff9715dc60
+
+	measure 'Meta Avance %' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			RETURN
+			    DIVIDE ( CALCULATE ( [Devengado Anual], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = _anio - 1 ), [PIM AA] )
+			```
+		formatString: 0.0%
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: df48da93-22c7-5795-9937-a4195694268a
+
+	measure 'Brecha vs Meta pp' = IF ( ISBLANK ( [Meta Avance %] ), BLANK (), [Avance Proyectado %] - [Meta Avance %] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: 3ac36892-e40e-598e-9084-73b7182f8c5b
+
+	measure 'Color Proyeccion' = ```
+			VAR _b = [Brecha vs Meta pp]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( _b ), "#1F2933", _b >= 0, "#2E7D32", _b >= -0.02, "#D49600", "#C62828" )
+			```
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: b6ca80d3-ae21-5b3b-bc89-7b3843acf5b9
+
+	measure 'Estado Proyeccion' = ```
+			VAR _b = [Brecha vs Meta pp]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( _b ), "Sin meta", _b >= 0, "● Cumple", _b >= -0.02, "▲ En riesgo", "■ No cumple" )
+			```
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: 4ba3d281-d623-5cb9-8578-1924f64533ac
+
+	measure 'Ritmo Esperado %' = DIVIDE ( MIN ( MAX ( dim_calendario[mes_num] ), [Mes Ultimo Dato] ), 12 )
+		formatString: 0.0%
+		displayFolder: 5 Proyeccion y metas
+		lineageTag: 11a52422-09c4-5163-8cc4-4fe3f8471910
+
+	measure 'Txt PIM' = "PIA S/ " & FORMAT ( [PIA] / 1e6, "#,0" ) & " M (" & FORMAT ( [Modificacion PIM %], "+0.0%;-0.0%" ) & ")" 
+		displayFolder: 6 Tarjetas
+		lineageTag: a5dbee32-7985-571c-abc0-0d66828db730
+
+	measure 'Txt Devengado' = ```
+			IF ( ISBLANK ( [Devengado Comparable AA] ), "Sin año anterior",
+			    "Año anterior: S/ " & FORMAT ( [Devengado Comparable AA] / 1e6, "#,0" ) & " M" )
+			```
+		displayFolder: 6 Tarjetas
+		lineageTag: 86fe4bc4-3557-5fee-a76a-a7bee58ecfe5
+
+	measure 'Txt Avance' = ```
+			VAR _d = [Diferencia Avance pp]
+			RETURN
+			    IF ( ISBLANK ( [Avance al Corte AA %] ), "Sin año anterior",
+			        "Año anterior: " & FORMAT ( [Avance al Corte AA %], "0.0%" ) & "  " & IF ( _d >= 0, "▲ +", "▼ " ) & FORMAT ( _d * 100, "0.0" ) & " pp" )
+			```
+		displayFolder: 6 Tarjetas
+		lineageTag: 61abb2e4-7840-5b98-aacf-7228c424e5da
+
+	measure 'Txt Var' = ```
+			IF ( ISBLANK ( [Devengado Comparable AA] ), "Sin año anterior",
+			    IF ( [Var Interanual S/] >= 0, "▲ +S/ ", "▼ −S/ " ) & FORMAT ( ABS ( [Var Interanual S/] ) / 1e6, "#,0" ) & " M vs año anterior" )
+			```
+		displayFolder: 6 Tarjetas
+		lineageTag: 66c946c9-ad14-5a63-877b-f2853154aa31
+
+	measure 'Txt Proyeccion' = ```
+			IF ( ISBLANK ( [Meta Avance %] ), "Sin línea base para la meta",
+			    "Meta " & FORMAT ( [Meta Avance %], "0.0%" ) & "  " & [Estado Proyeccion] )
+			```
+		displayFolder: 6 Tarjetas
+		lineageTag: 849527c1-55bb-5097-9c43-63525536147b
+
+	measure 'Txt Certificacion' = "Sin devengar: S/ " & FORMAT ( [Certificado sin Devengar] / 1e6, "#,0" ) & " M"
+		displayFolder: 6 Tarjetas
+		lineageTag: e69df281-3246-5bf8-ae9d-306b0b484e70
+
+	measure 'Color Var' = IF ( [Var Interanual %] >= 0, "#2E7D32", "#C62828" )
+		displayFolder: 6 Tarjetas
+		lineageTag: bb64ce59-492b-513e-8b50-dc17e63abdaf
+
+	measure 'Color Avance' = ```
+			VAR _d = [Diferencia Avance pp]
+			RETURN
+			    SWITCH ( TRUE (), ISBLANK ( _d ), "#1F2933", _d >= 0, "#2E7D32", _d >= -0.02, "#D49600", "#C62828" )
+			```
+		displayFolder: 6 Tarjetas
+		lineageTag: f5926ecc-4e1e-5803-9ad8-83522f871ba0
+
+	measure 'Indicadores Cumple' = COUNTROWS ( FILTER ( indicadores_poa, indicadores_poa[estado] = "Cumple" ) ) + 0
+		formatString: 0
+		displayFolder: 7 POA
+		lineageTag: f75b5479-ef37-555e-8e53-9d5d366725f2
+
+	measure 'Indicadores En Riesgo' = COUNTROWS ( FILTER ( indicadores_poa, indicadores_poa[estado] = "En riesgo" ) ) + 0
+		formatString: 0
+		displayFolder: 7 POA
+		lineageTag: 880c46f7-b141-5608-8344-f9f3b13b7fce
+
+	measure 'Indicadores No Cumple' = COUNTROWS ( FILTER ( indicadores_poa, indicadores_poa[estado] = "No cumple" ) ) + 0
+		formatString: 0
+		displayFolder: 7 POA
+		lineageTag: 667802a4-ba37-50c5-8a5b-494dae605e10
+
+	measure 'Indicadores Total' = COUNTROWS ( indicadores_poa )
+		formatString: 0
+		displayFolder: 7 POA
+		lineageTag: 003be2b8-8a8c-516c-a36d-e61d574af77f
+
+	measure 'Estado Indicador' = ```
+			VAR _e = SELECTEDVALUE ( indicadores_poa[estado] )
+			RETURN
+			    SWITCH ( _e, "Cumple", "● Cumple", "En riesgo", "▲ En riesgo", "No cumple", "■ No cumple", _e )
+			```
+		displayFolder: 7 POA
+		lineageTag: ebd7cc26-f347-58aa-84f6-efa14588e1e8
+
+	measure 'Color Estado Indicador' = SELECTEDVALUE ( indicadores_poa[color_estado] )
+		displayFolder: 7 POA
+		lineageTag: 88dce748-b604-5882-ae29-d6b8d6115b18
+
+	measure 'Prioridad Sector' = ```
+			VAR _p = SELECTEDVALUE ( metas_sector_poa[prioridad] )
+			RETURN
+			    SWITCH ( _p, "Alta", "■ Alta", "Media", "▲ Media", "Baja", "● Baja", _p )
+			```
+		displayFolder: 7 POA
+		lineageTag: 87934d91-4396-530d-b5ae-7948e8b9189a
+
+	measure 'Color Prioridad Sector' = SELECTEDVALUE ( metas_sector_poa[color_prioridad] )
+		displayFolder: 7 POA
+		lineageTag: 4e22d285-f1b4-5918-aac0-f152dffeb354
+
+	measure 'Meta POA Avance %' = CALCULATE ( MAX ( indicadores_poa[meta_poa] ), indicadores_poa[codigo] = "IND01" )
+		formatString: 0.0%
+		displayFolder: 7 POA
+		lineageTag: 6a901844-a35f-5643-88a2-573f4f4e07b4
+
+	measure 'Txt POA' = "Meta POA " & MAX ( indicadores_poa[anio_poa] ) & ": avance de " & FORMAT ( [Meta POA Avance %], "0.0%" ) & " del PIM al cierre"
+		displayFolder: 7 POA
+		lineageTag: 9ac6201b-8c72-5c1b-891b-c9517b61fd8b
+
+	measure 'Pliegos' = ```
+			-- Entidad = pliego; en los gobiernos locales cada municipalidad (unidad ejecutora) es su propio pliego.
+			VAR _t = SUMMARIZE ( FILTER ( fact_presupuesto_anual, fact_presupuesto_anual[monto_pim] <> 0 ),
+			                     dim_entidad[nivel_gobierno_nombre], dim_entidad[pliego], dim_entidad[sec_ejec] )
+			RETURN
+			    COUNTROWS ( DISTINCT ( SELECTCOLUMNS ( _t, "entidad",
+			        IF ( dim_entidad[nivel_gobierno_nombre] = "GOBIERNOS LOCALES", "M" & dim_entidad[sec_ejec], "P" & dim_entidad[pliego] ) ) ) ) + 0
+			```
+		formatString: #,0
+		displayFolder: 9 Resumen
+		lineageTag: dd30ce99-5592-5057-b86b-756e5016b93f
+
+	measure 'Unidades Ejecutoras' = COUNTROWS ( SUMMARIZE ( FILTER ( fact_presupuesto_anual, fact_presupuesto_anual[monto_pim] <> 0 ), fact_presupuesto_anual[entidad_key] ) ) + 0
+		formatString: #,0
+		displayFolder: 9 Resumen
+		lineageTag: 1108d7b4-270f-562a-87c3-a2e7ef639a70
+
+	measure 'Txt Entidades' = FORMAT ( [Unidades Ejecutoras], "#,0" ) & " unidades ejecutoras"
+		displayFolder: 9 Resumen
+		lineageTag: eb898c7a-d0b3-5506-b605-152f3d76885e
+
+	measure 'Txt Periodo' = "Periodo analizado: " & CONCATENATEX ( ALL ( dim_anio ), dim_anio[anio_etiqueta], " y ", dim_anio[anio], ASC )
+		displayFolder: 9 Resumen
+		lineageTag: 0fdffdf2-84fc-56da-81c6-87deacbb5736
+
+	measure 'PIA AA' = ```
+			VAR _anio = MAX ( dim_anio[anio] )
+			RETURN
+			    CALCULATE ( [PIA], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = _anio - 1 )
+			```
+		formatString: #,0
+		displayFolder: 9 Resumen
+		lineageTag: 5bf21438-a5e9-5e28-b890-c1c7bb3baa9f
+
+	measure 'Var PIA %' = DIVIDE ( [PIA] - [PIA AA], [PIA AA] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 9 Resumen
+		lineageTag: f3553ec3-408a-5502-bb94-0201830d3ae6
+
+	measure 'Var PIM %' = DIVIDE ( [PIM] - [PIM AA], [PIM AA] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 9 Resumen
+		lineageTag: c9ec9225-7577-5b54-af22-0f725f84b4fa
+
+	measure 'Modificacion PIM S/' = [PIM] - [PIA]
+		formatString: #,0
+		displayFolder: 9 Resumen
+		lineageTag: ef0354d6-06e0-501d-8842-ed3929db1d05
+
+	measure 'Saldo %' = DIVIDE ( [Saldo por Ejecutar], [PIM] )
+		formatString: 0.0%
+		displayFolder: 9 Resumen
+		lineageTag: 08fe57e9-83e1-5872-98cb-4cdfa9affb95
+
+	measure 'Contribucion Var PIM pp' = DIVIDE ( [PIM] - [PIM AA], CALCULATE ( [PIM AA], ALLSELECTED () ) )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 9 Resumen
+		lineageTag: 1d609709-9594-5a9d-a3ef-4385b875404b
+
+	measure 'Participacion PIM %' = DIVIDE ( [PIM], CALCULATE ( [PIM], ALLSELECTED (), VALUES ( dim_anio[anio_texto] ) ) )
+		formatString: 0.0%
+		displayFolder: 9 Resumen
+		lineageTag: e8859428-d9f7-55a5-80bf-5894f0961e77
+
+	measure 'Txt PIA' = ```
+			IF ( ISBLANK ( [PIA AA] ), "Sin año anterior",
+			    "Año anterior: S/ " & FORMAT ( [PIA AA] / 1e6, "#,0" ) & " M (" & FORMAT ( [Var PIA %], "+0.0%;-0.0%" ) & ")" )
+			```
+		displayFolder: 9 Resumen
+		lineageTag: ad12039e-81ae-531f-96f9-766a20687f46
+
+	measure 'Txt Modificacion' = "Modificado: " & FORMAT ( [Modificacion PIM %], "+0.0%;-0.0%" ) & " (S/ " & FORMAT ( [Modificacion PIM S/] / 1e6, "#,0" ) & " M)"
+		displayFolder: 9 Resumen
+		lineageTag: ee13a66d-acf4-5dbb-a6c7-54078a5b49d0
+
+	measure 'Txt Saldo' = FORMAT ( [Saldo %], "0.0%" ) & " del PIM aún sin devengar"
+		displayFolder: 9 Resumen
+		lineageTag: edc5db00-4296-534f-a8b1-3b0b42a56bfc
+
+	measure 'Proyeccion A %' = CALCULATE ( MAX ( proyeccion_metodos[avance_proyectado] ), proyeccion_metodos[metodo_codigo] = "A" )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: dad0ae88-1411-5ec3-8e61-8bf56f43d4c9
+
+	measure 'Proyeccion B %' = CALCULATE ( MAX ( proyeccion_metodos[avance_proyectado] ), proyeccion_metodos[metodo_codigo] = "B" )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 87112035-ca5c-5972-8ed7-1e6c025d0bd7
+
+	measure 'Proyeccion C %' = CALCULATE ( MAX ( proyeccion_metodos[avance_proyectado] ), proyeccion_metodos[metodo_codigo] = "C" )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 4ef68b4a-8257-551c-99e3-99fb18fcbd8d
+
+	measure 'Txt Intervalo C' = ```
+			VAR _i = CALCULATE ( MAX ( proyeccion_metodos[limite_inferior] ), proyeccion_metodos[metodo_codigo] = "C" )
+			VAR _s = CALCULATE ( MAX ( proyeccion_metodos[limite_superior] ), proyeccion_metodos[metodo_codigo] = "C" )
+			RETURN
+			    "Intervalo 95 %: " & FORMAT ( _i, "0.0%" ) & " – " & FORMAT ( _s, "0.0%" )
+			```
+		displayFolder: 10 Analisis integral
+		lineageTag: 4568fdf1-e2c0-512f-91a6-121d398a5258
+
+	measure 'Txt Intervalo B' = ```
+			VAR _e = CALCULATE ( MAX ( proyeccion_metodos[error_prueba_base] ), proyeccion_metodos[metodo_codigo] = "B" )
+			RETURN
+			    "Error en la prueba con el año base: " & FORMAT ( _e, "+0.0%;-0.0%" )
+			```
+		displayFolder: 10 Analisis integral
+		lineageTag: b93702d7-753d-5de3-86d5-05de4dd3f070
+
+	measure 'UE Clasificadas' = CALCULATE ( COUNTROWS ( clasificacion_entidades ), clasificacion_entidades[pim_relevante] = TRUE () ) + 0
+		formatString: #,0
+		displayFolder: 10 Analisis integral
+		lineageTag: e53aa5bc-4a2c-5bae-98a7-a6c7be01fa53
+
+	measure 'UE Clasificadas %' = DIVIDE ( [UE Clasificadas], CALCULATE ( [UE Clasificadas], REMOVEFILTERS ( clasificacion_entidades[clase], clasificacion_entidades[orden_clase], clasificacion_entidades[cuartil] ) ) )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 95c328e0-b603-5631-bc58-c8c8509a736b
+
+	measure 'UE Alta Ejecucion %' = DIVIDE ( CALCULATE ( [UE Clasificadas], KEEPFILTERS ( clasificacion_entidades[clase] IN { "Muy alta", "Alta" } ) ), [UE Clasificadas] )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 170f9aa5-df9e-531f-adcf-fdea037deef7
+
+	measure 'UE Baja Ejecucion %' = DIVIDE ( CALCULATE ( [UE Clasificadas], KEEPFILTERS ( clasificacion_entidades[clase] IN { "Baja", "Muy baja" } ) ), [UE Clasificadas] )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 66dea27a-a063-553d-9447-795aea77712c
+
+	measure 'Avance Mediano UE' = MEDIANX ( FILTER ( clasificacion_entidades, clasificacion_entidades[pim_relevante] ), clasificacion_entidades[avance_evaluado] )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 2cb0887e-f449-5a47-b2eb-90c78007d617
+
+	measure 'Indice Estacional' = AVERAGE ( estacionalidad_mensual[indice_estacional] )
+		formatString: 0.00
+		displayFolder: 10 Analisis integral
+		lineageTag: d3606dcf-5dcc-5132-a514-abca9acab1e0
+
+	measure 'Variacion Mensual %' = AVERAGE ( estacionalidad_mensual[variacion_mensual] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 469e3d56-0140-59ae-86cd-c8299186aa06
+
+	measure 'Participacion Mes %' = SUM ( estacionalidad_mensual[participacion] )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 719bbd3d-c85b-52fa-88a4-99f04e9598ec
+
+	measure 'Devengado Mes' = SUM ( estacionalidad_mensual[devengado] )
+		formatString: #,0
+		displayFolder: 10 Analisis integral
+		lineageTag: 7d65d4df-8cfc-597c-a98d-eec10bc58c72
+
+	measure 'Atipicos' = COUNTROWS ( atipicos_entidades ) + 0
+		formatString: #,0
+		displayFolder: 10 Analisis integral
+		lineageTag: 2a76d841-6011-58ca-9f47-e28479c79b18
+
+	measure 'Atipicos Confirmados' = CALCULATE ( COUNTROWS ( atipicos_entidades ), KEEPFILTERS ( atipicos_entidades[tecnica] = "IQR y z robusto" ) ) + 0
+		formatString: #,0
+		displayFolder: 10 Analisis integral
+		lineageTag: fddf8126-b634-55a5-889f-102d14b723cd
+
+	measure 'Atipicos Extremos' = CALCULATE ( COUNTROWS ( atipicos_entidades ), KEEPFILTERS ( atipicos_entidades[severidad] = "Extremo" ) ) + 0
+		formatString: #,0
+		displayFolder: 10 Analisis integral
+		lineageTag: 58c47a85-7360-5ba1-af79-19c9a7d06ff1
+
+	measure 'UE con Atipicos' = DISTINCTCOUNT ( atipicos_entidades[entidad_key] ) + 0
+		formatString: #,0
+		displayFolder: 10 Analisis integral
+		lineageTag: 2816aad7-f558-51e2-a903-7c79293a7dad
+
+	measure 'Abs Z' = MAXX ( atipicos_entidades, ABS ( atipicos_entidades[z_robusta] ) )
+		formatString: 0.0
+		displayFolder: 10 Analisis integral
+		lineageTag: 5915b504-56c5-51d4-9143-eae407eba4f1
+
+	measure 'PIA Ley 2026' = CALCULATE ( [PIA], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = 2026 )
+		formatString: #,0
+		displayFolder: 11 Ley 2026
+		lineageTag: d1ad0a70-ed0a-5af0-b262-27104c937cae
+
+	measure 'PIA 2025 Referencia' = CALCULATE ( [PIA], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = 2025 )
+		formatString: #,0
+		displayFolder: 11 Ley 2026
+		lineageTag: dd8226fd-a479-5715-b351-c9a57248656e
+
+	measure 'Var Ley vs 2025 %' = DIVIDE ( [PIA Ley 2026] - [PIA 2025 Referencia], [PIA 2025 Referencia] )
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 11 Ley 2026
+		lineageTag: d815a1e5-f183-5547-a6ee-14df1190b5e9
+
+	measure 'Participacion Ley %' = DIVIDE ( [PIA Ley 2026], CALCULATE ( [PIA Ley 2026], ALLSELECTED () ) )
+		formatString: 0.0%
+		displayFolder: 11 Ley 2026
+		lineageTag: 0d4acf34-7b23-56e7-a292-737681fd7e20
+
+	measure 'Monto Ley Oficial' = CALCULATE ( MAX ( ley_2026_cuadre[monto_oficial] ), ley_2026_cuadre[concepto] = "Total" )
+		formatString: #,0
+		displayFolder: 11 Ley 2026
+		lineageTag: a41e8f57-9bab-5aa9-abf2-ef2610bdb4aa
+
+	measure 'Diferencia Ley %' = DIVIDE ( CALCULATE ( [PIA Ley 2026], REMOVEFILTERS () ), [Monto Ley Oficial] ) - 1
+		formatString: +0.000%;-0.000%;0.000%
+		displayFolder: 11 Ley 2026
+		lineageTag: 5a719486-1cc1-504d-8464-920faaa334fb
+
+	measure 'Ley Programas %' = DIVIDE ( CALCULATE ( [PIA Ley 2026], KEEPFILTERS ( dim_programa_presupuestal[tipo_programa] = "PROGRAMA PRESUPUESTAL" ) ), [PIA Ley 2026] )
+		formatString: 0.0%
+		displayFolder: 11 Ley 2026
+		lineageTag: 32da559c-e36e-50ed-8d54-7af2e572f45b
+
+	measure 'Txt Ley' = "Gold: S/ " & FORMAT ( CALCULATE ( [PIA Ley 2026], REMOVEFILTERS () ) / 1e6, "#,0.0" ) & " M (" & FORMAT ( [Diferencia Ley %], "+0.000%;-0.000%" ) & ")"
+		displayFolder: 11 Ley 2026
+		lineageTag: c6caa9b8-a8ea-55bc-9c1d-4b712c040361
+
+	measure 'Txt Var Ley' = "Presupuesto 2025: S/ " & FORMAT ( [PIA 2025 Referencia] / 1e6, "#,0" ) & " M"
+		displayFolder: 11 Ley 2026
+		lineageTag: da4304bf-41e6-5374-a487-cac608f5ef44
+
+	measure 'Log10 PIA' = IF ( [PIA] > 0, LOG10 ( [PIA] ) )
+		formatString: 0.00
+		displayFolder: 10 Analisis integral
+		lineageTag: 30973d95-8f77-5ce4-9784-c50d2866052f
+
+	measure 'Log10 PIM' = IF ( [PIM] > 0, LOG10 ( [PIM] ) )
+		formatString: 0.00
+		displayFolder: 10 Analisis integral
+		lineageTag: d17bd7ba-eff9-5953-ade8-27e8157be5aa
+
+	measure 'Avance Real 2026 %' = MAX ( proyeccion_mensual[real_acumulado] )
+		formatString: 0.0%
+		displayFolder: 10 Analisis integral
+		lineageTag: 09134650-5a08-5562-8d71-64e7d282f1b1
+
+	measure 'Pliegos Ley 2026' = CALCULATE ( [Pliegos], REMOVEFILTERS ( dim_anio ), dim_anio[anio] = 2026 )
+		formatString: #,0
+		displayFolder: 11 Ley 2026
+		lineageTag: dabfa0ab-4ede-5bf9-a447-ef4b0944fdc9
+
+	measure 'Cuadre Mensual vs Anual' = [Devengado Anual] - CALCULATE ( [Devengado], REMOVEFILTERS ( dim_calendario ), VALUES ( dim_anio[anio] ) )
+		formatString: #,0.00
+		displayFolder: 8 Control
+		lineageTag: e639620d-a39d-50b2-b1a6-a5e732db0145
+
+	column Columna
+		dataType: string
+		isHidden
+		lineageTag: 611eebe4-f8d2-58bc-91c6-1c3804df9efd
+		summarizeBy: none
+		sourceColumn: Columna
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Medidas = m
+		mode: import
+		source =
+				#table(type table [Columna = text], {})
+
+	annotation PBI_ResultType = Table

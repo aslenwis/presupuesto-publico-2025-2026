@@ -1,0 +1,109 @@
+table dim_calendario
+	lineageTag: 0a96a220-e89b-55d9-901e-ef05d162692a
+
+	column fecha
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 5990e294-00bc-5bd7-86ac-0c167639113a
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f0af64e-aada-54a2-9222-c6519fd3e06e
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 73b1cef1-c8c4-582b-bce7-74f2e64082cb
+		summarizeBy: none
+		sourceColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_nombre
+		dataType: string
+		lineageTag: 917ff734-1f83-532b-80f2-6daccf974c58
+		summarizeBy: none
+		sourceColumn: mes_nombre
+		sortByColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_abrev
+		dataType: string
+		lineageTag: 2db8a201-a927-5bdf-a699-e470b14b7f1f
+		summarizeBy: none
+		sourceColumn: mes_abrev
+		sortByColumn: mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: string
+		lineageTag: 8d71ed69-3a42-5843-8ffc-1a818cc6881a
+		summarizeBy: none
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column semestre
+		dataType: string
+		lineageTag: 9d0140d6-9f1e-56d5-910e-6ea4007868af
+		summarizeBy: none
+		sourceColumn: semestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_mes
+		dataType: string
+		lineageTag: 7a01bb41-f8c2-5067-be47-61da0bae3456
+		summarizeBy: none
+		sourceColumn: anio_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_mes_num
+		dataType: int64
+		formatString: 0
+		lineageTag: ff31b763-b9ad-55df-b717-28b06fc5e53c
+		summarizeBy: none
+		sourceColumn: anio_mes_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column tiene_datos
+		dataType: boolean
+		lineageTag: 1679b1cd-8647-5654-abf4-7901951405f2
+		summarizeBy: none
+		sourceColumn: tiene_datos
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_periodo_comparable
+		dataType: boolean
+		lineageTag: d1599ff6-5d03-5e2b-926a-7e19eb27d499
+		summarizeBy: none
+		sourceColumn: es_periodo_comparable
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendario = m
+		mode: import
+		source =
+				let
+				    Origen = Parquet.Document(File.Contents(RutaGold & "dim_calendario.parquet")),
+				    Resultado = Table.TransformColumnTypes(Origen, {{"fecha", type date}})
+				in
+				    Resultado
+
+	annotation PBI_ResultType = Table

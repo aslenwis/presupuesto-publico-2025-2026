@@ -1,0 +1,39 @@
+{
+  "name": "Presupuesto publico POA",
+  "dataColors": [
+    "#1F6FB2",
+    "#8C96A3",
+    "#B7791F",
+    "#2E9E8F",
+    "#7A5BA6",
+    "#D46A6A",
+    "#4F8A3C",
+    "#5E7085"
+  ],
+  "good": "#2E7D32",
+  "neutral": "#D49600",
+  "bad": "#C62828",
+  "maximum": "#0F3D66",
+  "center": "#5C9BD1",
+  "minimum": "#DCEAF6",
+  "background": "#FFFFFF",
+  "foreground": "#1F2933",
+  "tableAccent": "#1F6FB2",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#1F2933"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 9,
+      "color": "#52606D"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 24,
+      "color": "#1F2933"
+    }
+  }
+}
