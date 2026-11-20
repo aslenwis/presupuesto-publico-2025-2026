@@ -3,7 +3,7 @@
 Los CSV no se suben al repositorio porque pesan ~5 GB. Para reproducir el ETL:
 
 1. Entre a la Plataforma Nacional de Datos Abiertos, conjunto **Presupuesto y Ejecución de Gasto – Devengado Mensual** (MEF):
-   https://datosabiertos.gob.pe/dataset/presupuesto-y-ejecuci%C3%B3n-de-gasto-%E2%80%93-devengado-mensual
+   https://datosabiertos.mef.gob.pe/dataset/presupuesto-y-ejecucion-de-gasto-devengado-mensual
 2. Descargue `2025-Gasto-Devengado-Mensual.csv` y `2026-Gasto-Devengado-Mensual.csv`.
 3. Cópielos en esta carpeta (`data/bronze/`) sin cambiarles el nombre.
 
