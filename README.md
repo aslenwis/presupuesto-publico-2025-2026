@@ -68,8 +68,5 @@ reports/            Gráficos del notebook
 
 ## Fuente de datos
 
-Ministerio de Economía y Finanzas (MEF). *Presupuesto y Ejecución de Gasto – Devengado Mensual*. Plataforma Nacional de Datos Abiertos: https://datosabiertos.gob.pe/dataset/presupuesto-y-ejecuci%C3%B3n-de-gasto-%E2%80%93-devengado-mensual
+Ministerio de Economía y Finanzas (MEF). *Presupuesto y Ejecución de Gasto – Devengado Mensual*. Plataforma Nacional de Datos Abiertos: https://datosabiertos.mef.gob.pe/dataset/presupuesto-y-ejecucion-de-gasto-devengado-mensual
 
-## Integrantes
-
-*(completar)*
